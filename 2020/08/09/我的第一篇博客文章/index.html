@@ -6,19 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>我的第一篇博客文章 | Hexo</title>
+  <title>Java基本部分整理一：包装类、基本类型、String类 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这是二级标题这是三级标题这是四级标题这是五级标题这是六级标题">
+  <meta name="description" content="1、包装类包装类是对基本数据类型的封装，使其符合Java的面向对象特性，基本数据类型与包装类的对应关系如下所示。    基本数据类型 包装类    byte Byte   boolean Boolean   short Short   char Character   int Integer   long Long   float Float   double Double   包装类的继承关系如">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我的第一篇博客文章">
+<meta property="og:title" content="Java基本部分整理一：包装类、基本类型、String类">
 <meta property="og:url" content="http://yoursite.com/2020/08/09/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="这是二级标题这是三级标题这是四级标题这是五级标题这是六级标题">
+<meta property="og:description" content="1、包装类包装类是对基本数据类型的封装，使其符合Java的面向对象特性，基本数据类型与包装类的对应关系如下所示。    基本数据类型 包装类    byte Byte   boolean Boolean   short Short   char Character   int Integer   long Long   float Float   double Double   包装类的继承关系如">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=811377248,1952076172&fm=26&gp=0.jpg">
 <meta property="article:published_time" content="2020-08-09T02:20:41.000Z">
-<meta property="article:modified_time" content="2020-08-09T03:15:39.272Z">
+<meta property="article:modified_time" content="2020-08-10T15:05:01.274Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=811377248,1952076172&fm=26&gp=0.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -151,7 +153,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      我的第一篇博客文章
+      Java基本部分整理一：包装类、基本类型、String类
     </h1>
   
 
@@ -164,7 +166,266 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="这是二级标题"><a href="#这是二级标题" class="headerlink" title="这是二级标题"></a>这是二级标题</h2><h3 id="这是三级标题"><a href="#这是三级标题" class="headerlink" title="这是三级标题"></a>这是三级标题</h3><h4 id="这是四级标题"><a href="#这是四级标题" class="headerlink" title="这是四级标题"></a>这是四级标题</h4><h5 id="这是五级标题"><a href="#这是五级标题" class="headerlink" title="这是五级标题"></a>这是五级标题</h5><h6 id="这是六级标题"><a href="#这是六级标题" class="headerlink" title="这是六级标题"></a>这是六级标题</h6>
+        <h2 id="1、包装类"><a href="#1、包装类" class="headerlink" title="1、包装类"></a>1、包装类</h2><p>包装类是对基本数据类型的封装，使其符合Java的面向对象特性，基本数据类型与包装类的对应关系如下所示。</p>
+<table>
+<thead>
+<tr>
+<th><strong>基本数据类型</strong></th>
+<th align="center"><strong>包装类</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>byte</td>
+<td align="center">Byte</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td align="center">Boolean</td>
+</tr>
+<tr>
+<td>short</td>
+<td align="center">Short</td>
+</tr>
+<tr>
+<td>char</td>
+<td align="center">Character</td>
+</tr>
+<tr>
+<td>int</td>
+<td align="center">Integer</td>
+</tr>
+<tr>
+<td>long</td>
+<td align="center">Long</td>
+</tr>
+<tr>
+<td>float</td>
+<td align="center">Float</td>
+</tr>
+<tr>
+<td>double</td>
+<td align="center">Double</td>
+</tr>
+</tbody></table>
+<p>包装类的继承关系如下所示。<br><img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=811377248,1952076172&fm=26&gp=0.jpg" alt="包装类继承关系，转载自https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=811377248,1952076172&amp;fm=26&amp;gp=0.jpg" title="包装类继承关系"></p>
+<hr>
+<h2 id="2、包装类、基本类型、String类转换"><a href="#2、包装类、基本类型、String类转换" class="headerlink" title="2、包装类、基本类型、String类转换"></a>2、包装类、基本类型、String类转换</h2><h3 id="2-1-基本类型-gt-包装类"><a href="#2-1-基本类型-gt-包装类" class="headerlink" title="2.1 基本类型=&gt;包装类"></a>2.1 基本类型=&gt;包装类</h3><table>
+<thead>
+<tr>
+<th><strong>转换关系</strong></th>
+<th align="center"><strong>转换方式</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>byte-&gt;Byte</td>
+<td align="center">Byte(byte value)/static Byte.valueOf(byte b)</td>
+</tr>
+<tr>
+<td>boolean-&gt;Boolean</td>
+<td align="center">Boolean(boolean value)/static Boolean.valueOf(boolean b)</td>
+</tr>
+<tr>
+<td>short-&gt;Short</td>
+<td align="center">Short(short value)/static Short.valueOf(short b)</td>
+</tr>
+<tr>
+<td>char-&gt;Character</td>
+<td align="center">Character(char value)/static Character.valueOf(char b)</td>
+</tr>
+<tr>
+<td>long-&gt;Long</td>
+<td align="center">Long(long value)/static Long.valueOf(long b)</td>
+</tr>
+<tr>
+<td>float-&gt;Float</td>
+<td align="center">Float(float value)/static Float.valueOf(float b)</td>
+</tr>
+<tr>
+<td>double-&gt;Double</td>
+<td align="center">Double(double value)/static Double.valueOf(double b)</td>
+</tr>
+</tbody></table>
+<h3 id="2-2-包装类-gt-基本类型"><a href="#2-2-包装类-gt-基本类型" class="headerlink" title="2.2 包装类=&gt;基本类型"></a>2.2 包装类=&gt;基本类型</h3><table>
+<thead>
+<tr>
+<th><strong>转换关系</strong></th>
+<th align="center"><strong>转换方式</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>byte&lt;-Byte</td>
+<td align="center">byte ByteInstance.byteValue()</td>
+</tr>
+<tr>
+<td>boolean&lt;-Boolean</td>
+<td align="center">short ShortInstance.shortValue()</td>
+</tr>
+<tr>
+<td>short&lt;-Short</td>
+<td align="center">int IntegerInstance.intValue()</td>
+</tr>
+<tr>
+<td>char&lt;-Character</td>
+<td align="center">char CharacterInstance.charValue()</td>
+</tr>
+<tr>
+<td>long&lt;-Long</td>
+<td align="center">long LongInstance.longValue()</td>
+</tr>
+<tr>
+<td>float&lt;-Float</td>
+<td align="center">float FloatInstance.floatValue()</td>
+</tr>
+<tr>
+<td>double&lt;-Double</td>
+<td align="center">double DoubleInstance.doubleValue()</td>
+</tr>
+</tbody></table>
+<h3 id="2-3-基本类型-gt-String"><a href="#2-3-基本类型-gt-String" class="headerlink" title="2.3 基本类型=&gt;String"></a>2.3 基本类型=&gt;String</h3><table>
+<thead>
+<tr>
+<th><strong>转换关系</strong></th>
+<th align="center"><strong>转换方式</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>byte-&gt;String</td>
+<td align="center">Byte.toString(byte value)/static String.valueOf(byte b)</td>
+</tr>
+<tr>
+<td>boolean-&gt;String</td>
+<td align="center">Boolean.toString(boolean value)/static String.valueOf(boolean b)</td>
+</tr>
+<tr>
+<td>short-&gt;String</td>
+<td align="center">Short.toString(short value)/static String.valueOf(short b)</td>
+</tr>
+<tr>
+<td>char-&gt;String</td>
+<td align="center">Character.toString(char value)/static String.valueOf(char b)</td>
+</tr>
+<tr>
+<td>long-&gt;String</td>
+<td align="center">Long.toString(long value)/static String.valueOf(long b)</td>
+</tr>
+<tr>
+<td>float-&gt;String</td>
+<td align="center">Float.toString(float value)/static String.valueOf(float b)</td>
+</tr>
+<tr>
+<td>double-&gt;String</td>
+<td align="center">Double.toString(double value)/static String.valueOf(double b)</td>
+</tr>
+</tbody></table>
+<h3 id="2-4-String-gt-基本类型"><a href="#2-4-String-gt-基本类型" class="headerlink" title="2.4 String=&gt;基本类型"></a>2.4 String=&gt;基本类型</h3><table>
+<thead>
+<tr>
+<th><strong>转换关系</strong></th>
+<th align="center"><strong>转换方式</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>byte&lt;-String</td>
+<td align="center">static byte Byte.parseByte(String s)</td>
+</tr>
+<tr>
+<td>boolean&lt;-String</td>
+<td align="center">static boolean Boolean.parseBoolean(String s)</td>
+</tr>
+<tr>
+<td>short&lt;-String</td>
+<td align="center">static short Short.parseShort(String s)</td>
+</tr>
+<tr>
+<td><del>char&lt;-String</del></td>
+<td align="center"><del>static char Character.parseCharacter(String s)</del></td>
+</tr>
+<tr>
+<td>long&lt;-String</td>
+<td align="center">static long Long.parseLong(String s)</td>
+</tr>
+<tr>
+<td>float&lt;-String</td>
+<td align="center">static float Float.parseFloat(String s)</td>
+</tr>
+<tr>
+<td>double&lt;-String</td>
+<td align="center">static double Double.parseDouble(String s)</td>
+</tr>
+</tbody></table>
+<h3 id="2-5-包装类-gt-String"><a href="#2-5-包装类-gt-String" class="headerlink" title="2.5 包装类=&gt;String"></a>2.5 包装类=&gt;String</h3><table>
+<thead>
+<tr>
+<th><strong>转换关系</strong></th>
+<th align="center"><strong>转换方式</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Byte-&gt;String</td>
+<td align="center">String ByteInstance.toString()</td>
+</tr>
+<tr>
+<td>Boolean-&gt;String</td>
+<td align="center">String BooleanInstance.toString()</td>
+</tr>
+<tr>
+<td>Short-&gt;String</td>
+<td align="center">String ShortInstance.toString()</td>
+</tr>
+<tr>
+<td>Character-&gt;String</td>
+<td align="center">String CharacterInstance.toString()</td>
+</tr>
+<tr>
+<td>Long-&gt;String</td>
+<td align="center">String LongInstance.toString()</td>
+</tr>
+<tr>
+<td>Float-&gt;String</td>
+<td align="center">String FloatInstance.toString()</td>
+</tr>
+<tr>
+<td>Double-&gt;String</td>
+<td align="center">String DoubleInstance.toString()</td>
+</tr>
+</tbody></table>
+<h3 id="2-6-String-gt-包装类"><a href="#2-6-String-gt-包装类" class="headerlink" title="2.6 String=&gt;包装类"></a>2.6 String=&gt;包装类</h3><table>
+<thead>
+<tr>
+<th><strong>转换关系</strong></th>
+<th align="center"><strong>转换方式</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Byte&lt;-String</td>
+<td align="center">static Byte.valueOf(String b)</td>
+</tr>
+<tr>
+<td>Boolean&lt;-String</td>
+<td align="center">static Boolean.valueOf(String b)</td>
+</tr>
+<tr>
+<td>Short&lt;-String</td>
+<td align="center">static Short.valueOf(String b)</td>
+</tr>
+<tr>
+<td>Character&lt;-String</td>
+<td align="center">static Character.valueOf(String b)</td>
+</tr>
+<tr>
+<td>Long&lt;-String</td>
+<td align="center">static Long.valueOf(String b)</td>
+</tr>
+<tr>
+<td>Float&lt;-String</td>
+<td align="center">static Float.valueOf(String b)</td>
+</tr>
+<tr>
+<td>Double&lt;-String</td>
+<td align="center">static Double.valueOf(String b)</td>
+</tr>
+</tbody></table>
+
       
 
       
