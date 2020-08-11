@@ -6,15 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020/8 | Hexo</title>
+  <title>Java基础知识整理一：包装类、基本类型、String类 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/2020/08/index.html">
+  <meta name="description" content="1、包装类包装类是对基本数据类型的封装，使其符合Java的面向对象特性，基本数据类型与包装类的对应关系如下所示。    基本数据类型 包装类    byte Byte   boolean Boolean   short Short   char Character   int Integer   long Long   float Float   double Double   包装类的继承关系如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java基础知识整理一：包装类、基本类型、String类">
+<meta property="og:url" content="http://yoursite.com/2020/08/09/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%B8%80/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1、包装类包装类是对基本数据类型的封装，使其符合Java的面向对象特性，基本数据类型与包装类的对应关系如下所示。    基本数据类型 包装类    byte Byte   boolean Boolean   short Short   char Character   int Integer   long Long   float Float   double Double   包装类的继承关系如">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=811377248,1952076172&fm=26&gp=0.jpg">
+<meta property="article:published_time" content="2020-08-09T02:20:41.000Z">
+<meta property="article:modified_time" content="2020-08-11T13:37:09.253Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=811377248,1952076172&fm=26&gp=0.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -140,103 +146,402 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Java基础知识整理一" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/11/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%BA%8C/" class="archive-article-date">
-  	<time datetime="2020-08-11T13:29:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-11</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/11/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%BA%8C/">Java基础知识整理二：单例模式</a>
+    <h1 class="article-title" itemprop="name">
+      Java基础知识整理一：包装类、基本类型、String类
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/09/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%B8%80/" class="archive-article-date">
+        
+        <a href="/2020/08/09/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%B8%80/" class="archive-article-date">
   	<time datetime="2020-08-09T02:20:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-09</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/09/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%B8%80/">Java基础知识整理一：包装类、基本类型、String类</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1、包装类"><a href="#1、包装类" class="headerlink" title="1、包装类"></a>1、包装类</h2><p>包装类是对基本数据类型的封装，使其符合Java的面向对象特性，基本数据类型与包装类的对应关系如下所示。</p>
+<table>
+<thead>
+<tr>
+<th><strong>基本数据类型</strong></th>
+<th align="center"><strong>包装类</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>byte</td>
+<td align="center">Byte</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td align="center">Boolean</td>
+</tr>
+<tr>
+<td>short</td>
+<td align="center">Short</td>
+</tr>
+<tr>
+<td>char</td>
+<td align="center">Character</td>
+</tr>
+<tr>
+<td>int</td>
+<td align="center">Integer</td>
+</tr>
+<tr>
+<td>long</td>
+<td align="center">Long</td>
+</tr>
+<tr>
+<td>float</td>
+<td align="center">Float</td>
+</tr>
+<tr>
+<td>double</td>
+<td align="center">Double</td>
+</tr>
+</tbody></table>
+<p>包装类的继承关系如下所示。<br><img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=811377248,1952076172&fm=26&gp=0.jpg" alt="包装类继承关系，转载自https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=811377248,1952076172&amp;fm=26&amp;gp=0.jpg" title="包装类继承关系"></p>
+<hr>
+<h2 id="2、包装类、基本类型、String类转换"><a href="#2、包装类、基本类型、String类转换" class="headerlink" title="2、包装类、基本类型、String类转换"></a>2、包装类、基本类型、String类转换</h2><h3 id="2-1-基本类型-gt-包装类"><a href="#2-1-基本类型-gt-包装类" class="headerlink" title="2.1 基本类型=&gt;包装类"></a>2.1 基本类型=&gt;包装类</h3><table>
+<thead>
+<tr>
+<th><strong>转换关系</strong></th>
+<th align="center"><strong>转换方式</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>byte-&gt;Byte</td>
+<td align="center">Byte(byte value)/static Byte.valueOf(byte b)</td>
+</tr>
+<tr>
+<td>boolean-&gt;Boolean</td>
+<td align="center">Boolean(boolean value)/static Boolean.valueOf(boolean b)</td>
+</tr>
+<tr>
+<td>short-&gt;Short</td>
+<td align="center">Short(short value)/static Short.valueOf(short b)</td>
+</tr>
+<tr>
+<td>char-&gt;Character</td>
+<td align="center">Character(char value)/static Character.valueOf(char b)</td>
+</tr>
+<tr>
+<td>long-&gt;Long</td>
+<td align="center">Long(long value)/static Long.valueOf(long b)</td>
+</tr>
+<tr>
+<td>float-&gt;Float</td>
+<td align="center">Float(float value)/static Float.valueOf(float b)</td>
+</tr>
+<tr>
+<td>double-&gt;Double</td>
+<td align="center">Double(double value)/static Double.valueOf(double b)</td>
+</tr>
+</tbody></table>
+<h3 id="2-2-包装类-gt-基本类型"><a href="#2-2-包装类-gt-基本类型" class="headerlink" title="2.2 包装类=&gt;基本类型"></a>2.2 包装类=&gt;基本类型</h3><table>
+<thead>
+<tr>
+<th><strong>转换关系</strong></th>
+<th align="center"><strong>转换方式</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>byte&lt;-Byte</td>
+<td align="center">byte ByteInstance.byteValue()</td>
+</tr>
+<tr>
+<td>boolean&lt;-Boolean</td>
+<td align="center">short ShortInstance.shortValue()</td>
+</tr>
+<tr>
+<td>short&lt;-Short</td>
+<td align="center">int IntegerInstance.intValue()</td>
+</tr>
+<tr>
+<td>char&lt;-Character</td>
+<td align="center">char CharacterInstance.charValue()</td>
+</tr>
+<tr>
+<td>long&lt;-Long</td>
+<td align="center">long LongInstance.longValue()</td>
+</tr>
+<tr>
+<td>float&lt;-Float</td>
+<td align="center">float FloatInstance.floatValue()</td>
+</tr>
+<tr>
+<td>double&lt;-Double</td>
+<td align="center">double DoubleInstance.doubleValue()</td>
+</tr>
+</tbody></table>
+<h3 id="2-3-基本类型-gt-String"><a href="#2-3-基本类型-gt-String" class="headerlink" title="2.3 基本类型=&gt;String"></a>2.3 基本类型=&gt;String</h3><table>
+<thead>
+<tr>
+<th><strong>转换关系</strong></th>
+<th align="center"><strong>转换方式</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>byte-&gt;String</td>
+<td align="center">Byte.toString(byte value)/static String.valueOf(byte b)</td>
+</tr>
+<tr>
+<td>boolean-&gt;String</td>
+<td align="center">Boolean.toString(boolean value)/static String.valueOf(boolean b)</td>
+</tr>
+<tr>
+<td>short-&gt;String</td>
+<td align="center">Short.toString(short value)/static String.valueOf(short b)</td>
+</tr>
+<tr>
+<td>char-&gt;String</td>
+<td align="center">Character.toString(char value)/static String.valueOf(char b)</td>
+</tr>
+<tr>
+<td>long-&gt;String</td>
+<td align="center">Long.toString(long value)/static String.valueOf(long b)</td>
+</tr>
+<tr>
+<td>float-&gt;String</td>
+<td align="center">Float.toString(float value)/static String.valueOf(float b)</td>
+</tr>
+<tr>
+<td>double-&gt;String</td>
+<td align="center">Double.toString(double value)/static String.valueOf(double b)</td>
+</tr>
+</tbody></table>
+<h3 id="2-4-String-gt-基本类型"><a href="#2-4-String-gt-基本类型" class="headerlink" title="2.4 String=&gt;基本类型"></a>2.4 String=&gt;基本类型</h3><table>
+<thead>
+<tr>
+<th><strong>转换关系</strong></th>
+<th align="center"><strong>转换方式</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>byte&lt;-String</td>
+<td align="center">static byte Byte.parseByte(String s)</td>
+</tr>
+<tr>
+<td>boolean&lt;-String</td>
+<td align="center">static boolean Boolean.parseBoolean(String s)</td>
+</tr>
+<tr>
+<td>short&lt;-String</td>
+<td align="center">static short Short.parseShort(String s)</td>
+</tr>
+<tr>
+<td><del>char&lt;-String</del></td>
+<td align="center"><del>static char Character.parseCharacter(String s)</del></td>
+</tr>
+<tr>
+<td>long&lt;-String</td>
+<td align="center">static long Long.parseLong(String s)</td>
+</tr>
+<tr>
+<td>float&lt;-String</td>
+<td align="center">static float Float.parseFloat(String s)</td>
+</tr>
+<tr>
+<td>double&lt;-String</td>
+<td align="center">static double Double.parseDouble(String s)</td>
+</tr>
+</tbody></table>
+<h3 id="2-5-包装类-gt-String"><a href="#2-5-包装类-gt-String" class="headerlink" title="2.5 包装类=&gt;String"></a>2.5 包装类=&gt;String</h3><table>
+<thead>
+<tr>
+<th><strong>转换关系</strong></th>
+<th align="center"><strong>转换方式</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Byte-&gt;String</td>
+<td align="center">String ByteInstance.toString()</td>
+</tr>
+<tr>
+<td>Boolean-&gt;String</td>
+<td align="center">String BooleanInstance.toString()</td>
+</tr>
+<tr>
+<td>Short-&gt;String</td>
+<td align="center">String ShortInstance.toString()</td>
+</tr>
+<tr>
+<td>Character-&gt;String</td>
+<td align="center">String CharacterInstance.toString()</td>
+</tr>
+<tr>
+<td>Long-&gt;String</td>
+<td align="center">String LongInstance.toString()</td>
+</tr>
+<tr>
+<td>Float-&gt;String</td>
+<td align="center">String FloatInstance.toString()</td>
+</tr>
+<tr>
+<td>Double-&gt;String</td>
+<td align="center">String DoubleInstance.toString()</td>
+</tr>
+</tbody></table>
+<h3 id="2-6-String-gt-包装类"><a href="#2-6-String-gt-包装类" class="headerlink" title="2.6 String=&gt;包装类"></a>2.6 String=&gt;包装类</h3><table>
+<thead>
+<tr>
+<th><strong>转换关系</strong></th>
+<th align="center"><strong>转换方式</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Byte&lt;-String</td>
+<td align="center">static Byte.valueOf(String b)</td>
+</tr>
+<tr>
+<td>Boolean&lt;-String</td>
+<td align="center">static Boolean.valueOf(String b)</td>
+</tr>
+<tr>
+<td>Short&lt;-String</td>
+<td align="center">static Short.valueOf(String b)</td>
+</tr>
+<tr>
+<td>Character&lt;-String</td>
+<td align="center">static Character.valueOf(String b)</td>
+</tr>
+<tr>
+<td>Long&lt;-String</td>
+<td align="center">static Long.valueOf(String b)</td>
+</tr>
+<tr>
+<td>Float&lt;-String</td>
+<td align="center">static Float.valueOf(String b)</td>
+</tr>
+<tr>
+<td>Double&lt;-String</td>
+<td align="center">static Double.valueOf(String b)</td>
+</tr>
+</tbody></table>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/08/09/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%B8%80/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/09/hello-world/" class="archive-article-date">
-  	<time datetime="2020-08-09T02:15:40.295Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-09</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2020/08/11/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%BA%8C/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Java基础知识整理二：单例模式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/08/09/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/09/hello-world/">Hello World</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -259,8 +564,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
