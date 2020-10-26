@@ -6,17 +6,13 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Makefile整理一：常见选项 | Hexo</title>
+  <title>Archives: 2020/9 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1、警告相关-Wall会打开一些很有用的警告选项，建议编译时加此选项。-W-Wextra打印一些额外的警告信息。-w禁止显示所有警告信息。-Wshadow当一个局部变量遮盖住了另一个局部变量，或者全局变量时，给出警告。很有用的选项，建议打开。 -Wall 并不会打开此项。-Wpointer-arith    对函数指针或者void *类型的指针进行算术操作时给出警告。也很有用。 -Wall 并不会">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Makefile整理一：常见选项">
-<meta property="og:url" content="http://yoursite.com/2020/08/15/Makefile%E6%95%B4%E7%90%86%E4%B8%80/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/archives/2020/09/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1、警告相关-Wall会打开一些很有用的警告选项，建议编译时加此选项。-W-Wextra打印一些额外的警告信息。-w禁止显示所有警告信息。-Wshadow当一个局部变量遮盖住了另一个局部变量，或者全局变量时，给出警告。很有用的选项，建议打开。 -Wall 并不会打开此项。-Wpointer-arith    对函数指针或者void *类型的指针进行算术操作时给出警告。也很有用。 -Wall 并不会">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-08-15T02:17:27.000Z">
-<meta property="article:modified_time" content="2020-08-15T03:32:59.366Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -144,152 +140,76 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Makefile整理一" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Makefile整理一：常见选项
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/09/06/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%85%AB/" class="archive-article-date">
+  	<time datetime="2020-09-06T08:17:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-06</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/09/06/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%85%AB/">Java基础知识整理八:代理</a>
     </h1>
   
 
-        
-        <a href="/2020/08/15/Makefile%E6%95%B4%E7%90%86%E4%B8%80/" class="archive-article-date">
-  	<time datetime="2020-08-15T02:17:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1、警告相关"><a href="#1、警告相关" class="headerlink" title="1、警告相关"></a>1、警告相关</h2><p>-Wall会打开一些很有用的警告选项，建议编译时加此选项。<br>-W<br>-Wextra打印一些额外的警告信息。<br>-w禁止显示所有警告信息。<br>-Wshadow当一个局部变量遮盖住了另一个局部变量，或者全局变量时，给出警告。很有用的选项，建议打开。 -Wall 并不会打开此项。<br>-Wpointer-arith    对函数指针或者void *类型的指针进行算术操作时给出警告。也很有用。 -Wall 并不会打开此项。<br>-Wcast-qual当强制转化丢掉了类型修饰符时给出警告。 -Wall 并不会打开此项。<br>-Waggregate-return如果定义或调用了返回结构体或联合体的函数，编译器就发出警告。<br>-Winline无论是声明为 inline 或者是指定了-finline-functions 选项，如果某函数不能内联，编译器都将发出警告。如果你的代码含有很多 inline 函数的话，这是很有用的选项。<br>-Werror把警告当作错误。出现任何警告就放弃编译。<br>-Wunreachable-code如果编译器探测到永远不会执行到的代码，就给出警告。也是比较有用的选项。<br>-Wcast-align一旦某个指针类型强制转换导致目标所需的地址对齐增加时，编译器就发出警告。<br>-Wundef当一个没有定义的符号出现在 #if 中时，给出警告。<br>-Wredundant-decls如果在同一个可见域内某定义多次声明，编译器就发出警告，即使这些重复声明有效并且毫无差别。</p>
-<p>-pedantic以ANSI/ISO C标准列出的所有警告</p>
-<h2 id="2、优化相关"><a href="#2、优化相关" class="headerlink" title="2、优化相关"></a>2、优化相关</h2><p>-O0/-O禁止编译器进行优化。默认为此项。<br>-O1尝试优化编译时间和可执行文件大小。<br>-O2更多的优化，会尝试几乎全部的优化功能，但不会进行“空间换时间”的优化方法。<br>-O3在 -O2 的基础上再打开一些优化选项：-finline-functions， -funswitch-loops 和 -fgcse-after-reload 。<br>-Os对生成文件大小进行优化。它会打开 -O2 开的全部选项，除了会那些增加文件大小的。<br>-finline-functions把所有简单的函数内联进调用者。编译器会探索式地决定哪些函数足够简单，值得做这种内联。<br>-fstrict-aliasing施加最强的别名规则（aliasing rules）。<br>-Ofast:该选项将不会严格遵循语言标准，除了启用所有的-O3优化选项之外，也会针对某些语言启用部分优化。如：-ffast-math </p>
-<p>-flto链接时优化，多个中间文件通过链接器合并在一起，并将它们组合为一个程序，缩减代码体积，禁用lto使用-fno-lto。<br>-funroll-all-loops循环展开。<br>-floop-optimize2使用改进版本的循环优化器代替原来”-floop-optimize”。该优化器将使用不同的选项(-funroll-loops, -fpeel-loops, -funswitch-loops, -ftree-loop-im)分别控制循环优化的不同方面。目前这个新版本的优化器尚在开发中，并且生成的代码质量并不比以前的版本高。已废除，仅存在于GCC-4.1之前的版本中。<br>-ftrace执行尾部复制以扩大超级块的尺寸，它简化了函数控制流，从而允许其它的优化措施做的更好。据说挺有效<br>-ftree-vectorize在trees上执行循环向量化</p>
-<h2 id="3、标准"><a href="#3、标准" class="headerlink" title="3、标准"></a>3、标准</h2><p>-ansi支持符合ANSI标准的C程序。这样就会关闭GNU C中某些不兼容ANSI C的特性。<br>-std=c89<br>-iso9899:1990指明使用标准 ISO C90 作为标准来编译程序。<br>-std=c99<br>-std=iso9899:1999指明使用标准 ISO C99 作为标准来编译程序。<br>-std=c++98指明使用标准 C++98 作为标准来编译程序。<br>-std=gnu9x<br>-std=gnu99使用 ISO C99 再加上 GNU 的一些扩展。<br>-fno-asm不把asm, inline或typeof当作关键字，因此这些词可以用做标识符。用 __asm__， __inline__和__typeof__能够替代它们。 <code>-ansi&#39; 隐含声明了</code>-fno-asm’。<br>-fgnu89-inline告诉编译器在 C99 模式下看到 inline 函数时使用传统的 GNU 句法。</p>
-<h2 id="4、其他"><a href="#4、其他" class="headerlink" title="4、其他"></a>4、其他</h2><p>-fomit-frame-pointer选项编译出来的代码少了一些，最主要的区别是少了栈帧的切换和栈地址的保存，可以提升程序性能<br>-mavx2 -march=native -mfma设置优化采用的指令集</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查看支持的指令集</span><br><span class="line">grep flags -m1 &#x2F;proc&#x2F;cpuinfo | cut -d &quot;:&quot; -f 2 | tr &#39;[:upper:]&#39; &#39;[:lower:]&#39; | &#123; read FLAGS; OPT&#x3D;&quot;-march&#x3D;native&quot;; for flag in $FLAGS; do case &quot;$flag&quot; in &quot;sse4_1&quot; | &quot;sse4_2&quot; | &quot;ssse3&quot; | &quot;fma&quot; | &quot;cx16&quot; | &quot;popcnt&quot; | &quot;avx&quot; | &quot;avx2&quot;) OPT+&#x3D;&quot; -m$flag&quot;;; esac; done; MODOPT&#x3D;$&#123;OPT&#x2F;&#x2F;_&#x2F;\.&#125;; echo &quot;$MODOPT&quot;; &#125;</span><br></pre></td></tr></table></figure>
+        <div class="article-info info-on-right">
+          
+          
 
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/08/15/Makefile%E6%95%B4%E7%90%86%E4%B8%80/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
   
-<nav id="article-nav">
-  
-    <a href="/2020/08/17/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%BA%94/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Java基础知识整理五：Collection接口
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2020/08/13/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%9B%9B/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Java基础知识整理四：线程的6种状态</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2020/09/06/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%B8%83/" class="archive-article-date">
+  	<time datetime="2020-09-06T00:55:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-06</time>
+</a>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
+    	 
   
-  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/09/06/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%B8%83/">Java基础知识整理七：反射</a>
+    </h1>
   
 
+        <div class="article-info info-on-right">
+          
+          
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+  
+    </div></section>
   
 
-  
-
-  
+    
 
 
           </div>
@@ -312,8 +232,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

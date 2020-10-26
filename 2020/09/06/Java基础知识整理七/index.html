@@ -6,19 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Makefile整理一：常见选项 | Hexo</title>
+  <title>Java基础知识整理七：反射 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1、警告相关-Wall会打开一些很有用的警告选项，建议编译时加此选项。-W-Wextra打印一些额外的警告信息。-w禁止显示所有警告信息。-Wshadow当一个局部变量遮盖住了另一个局部变量，或者全局变量时，给出警告。很有用的选项，建议打开。 -Wall 并不会打开此项。-Wpointer-arith    对函数指针或者void *类型的指针进行算术操作时给出警告。也很有用。 -Wall 并不会">
+  <meta name="description" content="1、Class类实例的4种获取方式123456789101112131415161718&#x2F;&#x2F; 方式一 class属性Class class_1 &#x3D; Person.class;System.out.println(class_1);&#x2F;&#x2F; 方式二 运行时类的对象Person p &#x3D; new Person();Class class_2 &amp;#x">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Makefile整理一：常见选项">
-<meta property="og:url" content="http://yoursite.com/2020/08/15/Makefile%E6%95%B4%E7%90%86%E4%B8%80/index.html">
+<meta property="og:title" content="Java基础知识整理七：反射">
+<meta property="og:url" content="http://yoursite.com/2020/09/06/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%B8%83/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1、警告相关-Wall会打开一些很有用的警告选项，建议编译时加此选项。-W-Wextra打印一些额外的警告信息。-w禁止显示所有警告信息。-Wshadow当一个局部变量遮盖住了另一个局部变量，或者全局变量时，给出警告。很有用的选项，建议打开。 -Wall 并不会打开此项。-Wpointer-arith    对函数指针或者void *类型的指针进行算术操作时给出警告。也很有用。 -Wall 并不会">
+<meta property="og:description" content="1、Class类实例的4种获取方式123456789101112131415161718&#x2F;&#x2F; 方式一 class属性Class class_1 &#x3D; Person.class;System.out.println(class_1);&#x2F;&#x2F; 方式二 运行时类的对象Person p &#x3D; new Person();Class class_2 &amp;#x">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-08-15T02:17:27.000Z">
-<meta property="article:modified_time" content="2020-08-15T03:32:59.366Z">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599365681561&di=baef06a13c3a98954fc487bfdaee47c4&imgtype=0&src=http://image.mamicode.com/info/201808/20180818173157987352.png">
+<meta property="og:image" content="https://developer.ibm.com/developer/default/articles/j-lo-classloader/images/image001.jpg">
+<meta property="article:published_time" content="2020-09-06T00:55:05.000Z">
+<meta property="article:modified_time" content="2020-09-06T02:32:24.459Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599365681561&di=baef06a13c3a98954fc487bfdaee47c4&imgtype=0&src=http://image.mamicode.com/info/201808/20180818173157987352.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -144,35 +147,37 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Makefile整理一" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Java基础知识整理七" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Makefile整理一：常见选项
+      Java基础知识整理七：反射
     </h1>
   
 
         
-        <a href="/2020/08/15/Makefile%E6%95%B4%E7%90%86%E4%B8%80/" class="archive-article-date">
-  	<time datetime="2020-08-15T02:17:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-15</time>
+        <a href="/2020/09/06/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%B8%83/" class="archive-article-date">
+  	<time datetime="2020-09-06T00:55:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1、警告相关"><a href="#1、警告相关" class="headerlink" title="1、警告相关"></a>1、警告相关</h2><p>-Wall会打开一些很有用的警告选项，建议编译时加此选项。<br>-W<br>-Wextra打印一些额外的警告信息。<br>-w禁止显示所有警告信息。<br>-Wshadow当一个局部变量遮盖住了另一个局部变量，或者全局变量时，给出警告。很有用的选项，建议打开。 -Wall 并不会打开此项。<br>-Wpointer-arith    对函数指针或者void *类型的指针进行算术操作时给出警告。也很有用。 -Wall 并不会打开此项。<br>-Wcast-qual当强制转化丢掉了类型修饰符时给出警告。 -Wall 并不会打开此项。<br>-Waggregate-return如果定义或调用了返回结构体或联合体的函数，编译器就发出警告。<br>-Winline无论是声明为 inline 或者是指定了-finline-functions 选项，如果某函数不能内联，编译器都将发出警告。如果你的代码含有很多 inline 函数的话，这是很有用的选项。<br>-Werror把警告当作错误。出现任何警告就放弃编译。<br>-Wunreachable-code如果编译器探测到永远不会执行到的代码，就给出警告。也是比较有用的选项。<br>-Wcast-align一旦某个指针类型强制转换导致目标所需的地址对齐增加时，编译器就发出警告。<br>-Wundef当一个没有定义的符号出现在 #if 中时，给出警告。<br>-Wredundant-decls如果在同一个可见域内某定义多次声明，编译器就发出警告，即使这些重复声明有效并且毫无差别。</p>
-<p>-pedantic以ANSI/ISO C标准列出的所有警告</p>
-<h2 id="2、优化相关"><a href="#2、优化相关" class="headerlink" title="2、优化相关"></a>2、优化相关</h2><p>-O0/-O禁止编译器进行优化。默认为此项。<br>-O1尝试优化编译时间和可执行文件大小。<br>-O2更多的优化，会尝试几乎全部的优化功能，但不会进行“空间换时间”的优化方法。<br>-O3在 -O2 的基础上再打开一些优化选项：-finline-functions， -funswitch-loops 和 -fgcse-after-reload 。<br>-Os对生成文件大小进行优化。它会打开 -O2 开的全部选项，除了会那些增加文件大小的。<br>-finline-functions把所有简单的函数内联进调用者。编译器会探索式地决定哪些函数足够简单，值得做这种内联。<br>-fstrict-aliasing施加最强的别名规则（aliasing rules）。<br>-Ofast:该选项将不会严格遵循语言标准，除了启用所有的-O3优化选项之外，也会针对某些语言启用部分优化。如：-ffast-math </p>
-<p>-flto链接时优化，多个中间文件通过链接器合并在一起，并将它们组合为一个程序，缩减代码体积，禁用lto使用-fno-lto。<br>-funroll-all-loops循环展开。<br>-floop-optimize2使用改进版本的循环优化器代替原来”-floop-optimize”。该优化器将使用不同的选项(-funroll-loops, -fpeel-loops, -funswitch-loops, -ftree-loop-im)分别控制循环优化的不同方面。目前这个新版本的优化器尚在开发中，并且生成的代码质量并不比以前的版本高。已废除，仅存在于GCC-4.1之前的版本中。<br>-ftrace执行尾部复制以扩大超级块的尺寸，它简化了函数控制流，从而允许其它的优化措施做的更好。据说挺有效<br>-ftree-vectorize在trees上执行循环向量化</p>
-<h2 id="3、标准"><a href="#3、标准" class="headerlink" title="3、标准"></a>3、标准</h2><p>-ansi支持符合ANSI标准的C程序。这样就会关闭GNU C中某些不兼容ANSI C的特性。<br>-std=c89<br>-iso9899:1990指明使用标准 ISO C90 作为标准来编译程序。<br>-std=c99<br>-std=iso9899:1999指明使用标准 ISO C99 作为标准来编译程序。<br>-std=c++98指明使用标准 C++98 作为标准来编译程序。<br>-std=gnu9x<br>-std=gnu99使用 ISO C99 再加上 GNU 的一些扩展。<br>-fno-asm不把asm, inline或typeof当作关键字，因此这些词可以用做标识符。用 __asm__， __inline__和__typeof__能够替代它们。 <code>-ansi&#39; 隐含声明了</code>-fno-asm’。<br>-fgnu89-inline告诉编译器在 C99 模式下看到 inline 函数时使用传统的 GNU 句法。</p>
-<h2 id="4、其他"><a href="#4、其他" class="headerlink" title="4、其他"></a>4、其他</h2><p>-fomit-frame-pointer选项编译出来的代码少了一些，最主要的区别是少了栈帧的切换和栈地址的保存，可以提升程序性能<br>-mavx2 -march=native -mfma设置优化采用的指令集</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查看支持的指令集</span><br><span class="line">grep flags -m1 &#x2F;proc&#x2F;cpuinfo | cut -d &quot;:&quot; -f 2 | tr &#39;[:upper:]&#39; &#39;[:lower:]&#39; | &#123; read FLAGS; OPT&#x3D;&quot;-march&#x3D;native&quot;; for flag in $FLAGS; do case &quot;$flag&quot; in &quot;sse4_1&quot; | &quot;sse4_2&quot; | &quot;ssse3&quot; | &quot;fma&quot; | &quot;cx16&quot; | &quot;popcnt&quot; | &quot;avx&quot; | &quot;avx2&quot;) OPT+&#x3D;&quot; -m$flag&quot;;; esac; done; MODOPT&#x3D;$&#123;OPT&#x2F;&#x2F;_&#x2F;\.&#125;; echo &quot;$MODOPT&quot;; &#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="1、Class类实例的4种获取方式"><a href="#1、Class类实例的4种获取方式" class="headerlink" title="1、Class类实例的4种获取方式"></a>1、Class类实例的4种获取方式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 方式一 class属性</span><br><span class="line">Class class_1 &#x3D; Person.class;</span><br><span class="line">System.out.println(class_1);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 方式二 运行时类的对象</span><br><span class="line">Person p &#x3D; new Person();</span><br><span class="line">Class class_2 &#x3D; p.getClass();</span><br><span class="line">System.out.println(class_2);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 方式三 Class的静态方法</span><br><span class="line">String name &#x3D; &quot;com.atguigu.exer.Person&quot;;</span><br><span class="line">Class class_3 &#x3D; Class.forName(name);</span><br><span class="line">System.out.println(class_3);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 方式四 类的加载器</span><br><span class="line">ClassLoader classLoader &#x3D; this.getClass().getClassLoader();</span><br><span class="line">Class class_4 &#x3D; classLoader.loadClass(name);</span><br><span class="line">System.out.println(class_4);</span><br></pre></td></tr></table></figure>
 
+<h2 id="2、类的加载"><a href="#2、类的加载" class="headerlink" title="2、类的加载"></a>2、类的加载</h2><p>类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方法区内，然后在堆区创建一个 java.lang.Class对象，用来封装类在方法区内的数据结构。</p>
+<p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599365681561&di=baef06a13c3a98954fc487bfdaee47c4&imgtype=0&src=http://image.mamicode.com/info/201808/20180818173157987352.png" alt="类的加载流程" title="类的加载流程"></p>
+<p>引导类加载器（bootstrap class loader）：它用来加载 Java 的核心库，是用原生代码来实现的，并不继承自 java.lang.ClassLoader 。<br>扩展类加载器（extensions class loader）：它用来加载 Java 的扩展库。Java 虚拟机的实现会提供一个扩展库目录。该类加载器在此目录里面查找并加载 Java 类。<br>系统类加载器（system class loader）：它根据 Java 应用的类路径（CLASSPATH）来加载 Java 类。一般来说，Java 应用的类都是由它来完成加载的。可以通过 ClassLoader.getSystemClassLoader() 来获取它。</p>
+<p><img src="https://developer.ibm.com/developer/default/articles/j-lo-classloader/images/image001.jpg" alt="类加载器" title="类加载器"></p>
+<h2 id="3、类的创建"><a href="#3、类的创建" class="headerlink" title="3、类的创建"></a>3、类的创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 方式一 newInstance()调用无参构造器</span><br><span class="line">Person obj_1 &#x3D; (Person) class_1.newInstance();</span><br><span class="line">System.out.println(obj_1);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 方式二 调用有参构造器</span><br><span class="line">Constructor ccc &#x3D;  class_1.getConstructor(String.class, int.class, String.class);</span><br><span class="line">Person obj_2 &#x3D; (Person)ccc.newInstance(&quot;张三&quot;,20,&quot;男&quot;);</span><br><span class="line">System.out.println(obj_2.toString());</span><br></pre></td></tr></table></figure>
 
+<h2 id="4、类的属性"><a href="#4、类的属性" class="headerlink" title="4、类的属性"></a>4、类的属性</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">fields &#x3D; class_1.getDeclaredFields();</span><br><span class="line">for (Field f : fields) &#123;</span><br><span class="line">    System.out.println(f);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 权限修饰符</span><br><span class="line">    int modifiers &#x3D; f.getModifiers();</span><br><span class="line">    System.out.println(modifiers + &quot; &quot; + Modifier.toString(f.getModifiers()));</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 数据类型</span><br><span class="line">    Class type &#x3D; f.getType();</span><br><span class="line">    System.out.println(type.getName());</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 变量名</span><br><span class="line">    System.out.println(f.getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7、类的方法"><a href="#7、类的方法" class="headerlink" title="7、类的方法"></a>7、类的方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Method[] method &#x3D; class_1.getDeclaredMethods();</span><br><span class="line">for (Method m : method) &#123;</span><br><span class="line">    &#x2F;&#x2F; 权限修饰符</span><br><span class="line">    int modifiers &#x3D; m.getModifiers();</span><br><span class="line">    System.out.println(modifiers + &quot; &quot; + Modifier.toString(m.getModifiers()));</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 返回值类型</span><br><span class="line">    System.out.println(m.getReturnType().getName());</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 方法名</span><br><span class="line">    System.out.println(m.getName());</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 形参列表</span><br><span class="line">    Class[] parameterType &#x3D; m.getParameterTypes();</span><br><span class="line">    for (Class param : parameterType) &#123;</span><br><span class="line">        System.out.print(param.getName() + &quot; &quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -231,7 +236,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/08/15/Makefile%E6%95%B4%E7%90%86%E4%B8%80/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/06/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%B8%83/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -245,18 +250,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/08/17/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%BA%94/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/09/06/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%85%AB/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Java基础知识整理五：Collection接口
+          Java基础知识整理八:代理
         
       </div>
     </a>
   
   
-    <a href="/2020/08/13/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%9B%9B/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Java基础知识整理四：线程的6种状态</div>
+    <a href="/2020/08/19/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%85%AD/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java基础知识整理六：List接口</div>
       <i class="icon-circle-right"></i>
     </a>
   

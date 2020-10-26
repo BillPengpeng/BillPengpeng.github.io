@@ -142,6 +142,366 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java基础知识整理十" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/25/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%8D%81/">Java基础知识整理十：Map接口</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/25/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%8D%81/" class="archive-article-date">
+  	<time datetime="2020-10-25T05:24:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1、Map继承关系"><a href="#1、Map继承关系" class="headerlink" title="1、Map继承关系"></a>1、Map继承关系</h2><p>将键映射到值的对象<br>一个映射不能包含重复的键<br>每个键最多只能映射到一个值<br>Map接口和Collection接口的不同<br>Map是双列的,Collection是单列的<br>Map的键唯一,Collection的子体系Set是唯一的<br>Map集合的数据结构针对键有效，跟值无关;Collection集合的数据结构是针对元素有效</p>
+<p><img src="https://img2020.cnblogs.com/blog/1937896/202007/1937896-20200705114128770-1185636573.png" alt="Map继承关系" title="Map继承关系"></p>
+<h2 id="2、Map常用接口"><a href="#2、Map常用接口" class="headerlink" title="2、Map常用接口"></a>2、Map常用接口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">a:添加功能</span><br><span class="line">V put(K key,V value):添加元素。这个其实还有另一个功能?替换</span><br><span class="line">如果键是第一次存储，就直接存储元素，返回null</span><br><span class="line">如果键不是第一次存在，就用值把以前的值替换掉，返回以前的值</span><br><span class="line">b:删除功能</span><br><span class="line">void clear():移除所有的键值对元素</span><br><span class="line">V remove(Object key)：根据键删除键值对元素，并把值返回</span><br><span class="line">c:判断功能</span><br><span class="line">boolean containsKey(Object key)：判断集合是否包含指定的键</span><br><span class="line">boolean containsValue(Object value):判断集合是否包含指定的值</span><br><span class="line">boolean isEmpty()：判断集合是否为空</span><br><span class="line">d:获取功能</span><br><span class="line">Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet(): 返回一个键值对的Set集合</span><br><span class="line">V get(Object key):根据键获取值</span><br><span class="line">Set keySet():获取集合中所有键的集合</span><br><span class="line">Collection values():获取集合中所有值的集合</span><br><span class="line">e:长度功能</span><br><span class="line">int size()：返回集合中的键值对的对数</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、HaskMap添加元素"><a href="#3、HaskMap添加元素" class="headerlink" title="3、HaskMap添加元素"></a>3、HaskMap添加元素</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">JDK1.8</span><br><span class="line">final V putVal(int hash, K key, V value, boolean onlyIfAbsent,</span><br><span class="line">                   boolean evict) &#123;</span><br><span class="line">        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;</span><br><span class="line">        &#x2F;&#x2F; 头部为空</span><br><span class="line">        if ((tab &#x3D; table) &#x3D;&#x3D; null || (n &#x3D; tab.length) &#x3D;&#x3D; 0)</span><br><span class="line">            n &#x3D; (tab &#x3D; resize()).length;</span><br><span class="line">        &#x2F;&#x2F; 取元素位置</span><br><span class="line">        if ((p &#x3D; tab[i &#x3D; (n - 1) &amp; hash]) &#x3D;&#x3D; null)</span><br><span class="line">            tab[i] &#x3D; newNode(hash, key, value, null);</span><br><span class="line">        else &#123;</span><br><span class="line">            Node&lt;K,V&gt; e; K k;</span><br><span class="line">            if (p.hash &#x3D;&#x3D; hash &amp;&amp;</span><br><span class="line">                ((k &#x3D; p.key) &#x3D;&#x3D; key || (key !&#x3D; null &amp;&amp; key.equals(k))))</span><br><span class="line">                e &#x3D; p;</span><br><span class="line">            else if (p instanceof TreeNode)</span><br><span class="line">                &#x2F;&#x2F; 红黑树情况</span><br><span class="line">                e &#x3D; ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);</span><br><span class="line">            else &#123;</span><br><span class="line">                for (int binCount &#x3D; 0; ; ++binCount) &#123;</span><br><span class="line">                    if ((e &#x3D; p.next) &#x3D;&#x3D; null) &#123;</span><br><span class="line">                        p.next &#x3D; newNode(hash, key, value, null);</span><br><span class="line">                        &#x2F;&#x2F; 长度超过8，转换为红黑树</span><br><span class="line">                        if (binCount &gt;&#x3D; TREEIFY_THRESHOLD - 1) &#x2F;&#x2F; -1 for 1st</span><br><span class="line">                            treeifyBin(tab, hash);</span><br><span class="line">                        break;</span><br><span class="line">                    &#125;</span><br><span class="line">                    if (e.hash &#x3D;&#x3D; hash &amp;&amp;</span><br><span class="line">                        ((k &#x3D; e.key) &#x3D;&#x3D; key || (key !&#x3D; null &amp;&amp; key.equals(k))))</span><br><span class="line">                        break;</span><br><span class="line">                    p &#x3D; e;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (e !&#x3D; null) &#123; &#x2F;&#x2F; existing mapping for key</span><br><span class="line">                V oldValue &#x3D; e.value;</span><br><span class="line">                if (!onlyIfAbsent || oldValue &#x3D;&#x3D; null)</span><br><span class="line">                    e.value &#x3D; value;</span><br><span class="line">                afterNodeAccess(e);</span><br><span class="line">                return oldValue;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ++modCount;</span><br><span class="line">        if (++size &gt; threshold)</span><br><span class="line">            resize();</span><br><span class="line">        afterNodeInsertion(evict);</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img2018.cnblogs.com/blog/1702105/201907/1702105-20190715211143131-246164782.png" alt="Map元素添加（JDK1.8）" title="Map元素添加（JDK1.8）"></p>
+<p><img src="https://img2018.cnblogs.com/blog/1702105/201907/1702105-20190714152426260-984631225.png" alt="Map元素添加（JDK1.7）" title="Map元素添加（JDK1.7）"></p>
+<h2 id="4、HashMap与LinkedHashMap"><a href="#4、HashMap与LinkedHashMap" class="headerlink" title="4、HashMap与LinkedHashMap"></a>4、HashMap与LinkedHashMap</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; HashMap JDK1.8</span><br><span class="line">static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; &#123;</span><br><span class="line">    final int hash;</span><br><span class="line">    final K key;</span><br><span class="line">    V value;</span><br><span class="line">    Node&lt;K,V&gt; next;</span><br><span class="line"></span><br><span class="line">    Node(int hash, K key, V value, Node&lt;K,V&gt; next) &#123;</span><br><span class="line">        this.hash &#x3D; hash;</span><br><span class="line">        this.key &#x3D; key;</span><br><span class="line">        this.value &#x3D; value;</span><br><span class="line">        this.next &#x3D; next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public final K getKey()        &#123; return key; &#125;</span><br><span class="line">    public final V getValue()      &#123; return value; &#125;</span><br><span class="line">    public final String toString() &#123; return key + &quot;&#x3D;&quot; + value; &#125;</span><br><span class="line"></span><br><span class="line">    public final int hashCode() &#123;</span><br><span class="line">        return Objects.hashCode(key) ^ Objects.hashCode(value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public final V setValue(V newValue) &#123;</span><br><span class="line">        V oldValue &#x3D; value;</span><br><span class="line">        value &#x3D; newValue;</span><br><span class="line">        return oldValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public final boolean equals(Object o) &#123;</span><br><span class="line">        if (o &#x3D;&#x3D; this)</span><br><span class="line">            return true;</span><br><span class="line">        if (o instanceof Map.Entry) &#123;</span><br><span class="line">            Map.Entry&lt;?,?&gt; e &#x3D; (Map.Entry&lt;?,?&gt;)o;</span><br><span class="line">            if (Objects.equals(key, e.getKey()) &amp;&amp;</span><br><span class="line">                Objects.equals(value, e.getValue()))</span><br><span class="line">                return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; LinkedHashMap</span><br><span class="line">static class Entry&lt;K,V&gt; extends HashMap.Node&lt;K,V&gt; &#123;</span><br><span class="line">    Entry&lt;K,V&gt; before, after;</span><br><span class="line">    Entry(int hash, K key, V value, Node&lt;K,V&gt; next) &#123;</span><br><span class="line">        super(hash, key, value, next);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/10/25/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%8D%81/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java基础知识整理九" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/10/25/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%B9%9D/">Java基础知识整理九：Set接口</a>
+    </h1>
+  
+
+        
+        <a href="/2020/10/25/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%B9%9D/" class="archive-article-date">
+  	<time datetime="2020-10-25T04:32:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1、Set继承关系"><a href="#1、Set继承关系" class="headerlink" title="1、Set继承关系"></a>1、Set继承关系</h2><p><img src="https://img2018.cnblogs.com/blog/1677914/201907/1677914-20190728092246829-963791496.png" alt="Set继承关系" title="Set继承关系"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">A:添加功能</span><br><span class="line">boolean add(E e);</span><br><span class="line">boolean addAll(Collection&lt;? extends E&gt; c);</span><br><span class="line"></span><br><span class="line">B:删除功能</span><br><span class="line">boolean remove(Object o);</span><br><span class="line">boolean removeAll(Collection&lt;?&gt; c);</span><br><span class="line">void clear();</span><br><span class="line"></span><br><span class="line">C:长度功能</span><br><span class="line">int size();</span><br><span class="line"></span><br><span class="line">D:判断功能</span><br><span class="line">boolean isEmpty();</span><br><span class="line">boolean contains(Object o);</span><br><span class="line">boolean containsAll(Collection&lt;?&gt; c);</span><br><span class="line">boolean retainAll(Collection&lt;?&gt; c); </span><br><span class="line"></span><br><span class="line">E:获取Set集合的迭代器：</span><br><span class="line">Iterator&lt;E&gt; iterator();</span><br><span class="line"></span><br><span class="line">F:把集合转换成数组</span><br><span class="line">Object[] toArray();</span><br><span class="line">&lt;T&gt; T[] toArray(T[] a);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;判断元素是否重复，为子类提高重写方法</span><br><span class="line">boolean equals(Object o);</span><br><span class="line">int hashCode();</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、HashSet的元素添加过程"><a href="#2、HashSet的元素添加过程" class="headerlink" title="2、HashSet的元素添加过程"></a>2、HashSet的元素添加过程</h2><p>我们向HashSet中添加元素a,首先调用元素a所在类的hashCode()方法，计算元素a的哈希值，<br>此哈希值接着通过某种算法计算出在HashSet底层数组中的存放位置（即为：索引位置），判断<br>数组此位置上是否已经有元素：<br>    如果此位置上没有其他元素，则元素a添加成功。 —&gt;情况1<br>    如果此位置上有其他元素b(或以链表形式存在的多个元素），则比较元素a与元素b的hash值：<br>        如果hash值不相同，则元素a添加成功。—&gt;情况2<br>        如果hash值相同，进而需要调用元素a所在类的equals()方法：<br>               equals()返回true,元素a添加失败<br>               equals()返回false,则元素a添加成功。—&gt;情况3</p>
+<p>对于添加成功的情况2和情况3而言：元素a 与已经存在指定索引位置上数据以链表的方式存储。<br>jdk 7 :元素a放到数组中，指向原来的元素。<br>jdk 8 :原来的元素在数组中，指向元素a<br>总结：七上八下</p>
+<p>HashSet底层：数组+链表的结构<br>LinkedHashSet 底层采用双向链表实现，可以保证元素的插入顺序，又因为是HashSet的子类，所以插入的元素不能重复。<br>TreeSet底层：红黑树，可以照添加元素的指定属性，进行排序(compareTo接口)，添加对象时，要求是相同类型</p>
+<h2 id="3、LinkedHashSet源码"><a href="#3、LinkedHashSet源码" class="headerlink" title="3、LinkedHashSet源码"></a>3、LinkedHashSet源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">public class LinkedHashSet&lt;E&gt;</span><br><span class="line">    extends HashSet&lt;E&gt;</span><br><span class="line">    implements Set&lt;E&gt;, Cloneable, java.io.Serializable </span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">     public LinkedHashSet(int initialCapacity, float loadFactor) &#123;</span><br><span class="line">        super(initialCapacity, loadFactor, true);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public LinkedHashSet(int initialCapacity) &#123;</span><br><span class="line">        super(initialCapacity, .75f, true);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public LinkedHashSet() &#123;</span><br><span class="line">        super(16, .75f, true);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public LinkedHashSet(Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">        super(Math.max(2*c.size(), 11), .75f, true);</span><br><span class="line">        addAll(c);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Spliterator&lt;E&gt; spliterator() &#123;</span><br><span class="line">        return Spliterators.spliterator(this, Spliterator.DISTINCT | Spliterator.ORDERED);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">构造器调用父类的，下面就是其父类HashSet的对此的构造方法</span><br><span class="line"></span><br><span class="line">HashSet(int initialCapacity, float loadFactor, boolean dummy) &#123;</span><br><span class="line">    map &#x3D; new LinkedHashMap&lt;&gt;(initialCapacity, loadFactor);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、TreeSet源码"><a href="#4、TreeSet源码" class="headerlink" title="4、TreeSet源码"></a>4、TreeSet源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class TreeSet&lt;E&gt; extends AbstractSet&lt;E&gt;</span><br><span class="line">    implements NavigableSet&lt;E&gt;, Cloneable, java.io.Serializable</span><br><span class="line">&#123;</span><br><span class="line">    public TreeSet() &#123;</span><br><span class="line">        this(new TreeMap&lt;E,Object&gt;());</span><br><span class="line">    &#125;</span><br><span class="line">    public TreeSet(Comparator&lt;? super E&gt; comparator) &#123;</span><br><span class="line">        this(new TreeMap&lt;&gt;(comparator));</span><br><span class="line">    &#125;</span><br><span class="line">    public TreeSet(Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">        this();</span><br><span class="line">        addAll(c);</span><br><span class="line">    &#125;</span><br><span class="line">    public TreeSet(SortedSet&lt;E&gt; s) &#123;</span><br><span class="line">        this(s.comparator());</span><br><span class="line">        addAll(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/10/25/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%B9%9D/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java基础知识整理八" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/06/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%85%AB/">Java基础知识整理八:代理</a>
+    </h1>
+  
+
+        
+        <a href="/2020/09/06/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%85%AB/" class="archive-article-date">
+  	<time datetime="2020-09-06T08:17:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1、静态代理"><a href="#1、静态代理" class="headerlink" title="1、静态代理"></a>1、静态代理</h2><p>接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface UserDao &#123;</span><br><span class="line">    void work();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>被代理类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class UserADao implements UserDao &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void work() &#123;</span><br><span class="line">        System.out.println(&quot;调用UserADao的work方法&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class UserBDao implements UserDao &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void work() &#123;</span><br><span class="line">        System.out.println(&quot;调用UserBDao的work方法&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代理类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class UserDaoProxy implements UserDao &#123;</span><br><span class="line">    private UserDao dao;</span><br><span class="line">    public UserDaoProxy(UserDao dao)&#123;</span><br><span class="line">        this.dao &#x3D; dao;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void work() &#123;</span><br><span class="line">        System.out.println(&quot;调用UserDaoProxy开始&quot;);</span><br><span class="line">        this.dao.work();</span><br><span class="line">        System.out.println(&quot;调用UserDaoProxy结束&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        UserADao adao &#x3D; new UserADao();</span><br><span class="line">        UserDaoProxy aproxy &#x3D; new UserDaoProxy(adao);</span><br><span class="line">        aproxy.work();</span><br><span class="line"></span><br><span class="line">        UserBDao bdao &#x3D; new UserBDao();</span><br><span class="line">        UserDaoProxy bproxy &#x3D; new UserDaoProxy(bdao);</span><br><span class="line">        bproxy.work();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、动态代理"><a href="#2、动态代理" class="headerlink" title="2、动态代理"></a>2、动态代理</h2><p>动态创建代理类，动态调用被代理类的方法</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2109481-5bc36d36f5997da1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp" alt="动态代理流程" title="动态代理流程"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class ProxyHandler implements InvocationHandler &#123;</span><br><span class="line">    private Object obj; &#x2F;&#x2F;被代理类</span><br><span class="line"></span><br><span class="line">    public ProxyHandler(Object obj)&#123;</span><br><span class="line">        this.obj &#x3D; obj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; proxy代理类</span><br><span class="line">    @Override</span><br><span class="line">    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;</span><br><span class="line">        System.out.println(&quot;调用invoke开始&quot;);</span><br><span class="line">        Object returnValue&#x3D;method.invoke(this.obj, args);</span><br><span class="line">        System.out.println(&quot;调用invoke结束&quot;);</span><br><span class="line">        return returnValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        UserADao adao &#x3D; new UserADao();</span><br><span class="line">        ProxyHandler handler &#x3D; new ProxyHandler(adao);</span><br><span class="line">        UserDao UserDaoInterface &#x3D; (UserDao)Proxy.newProxyInstance(adao.getClass().getClassLoader(), adao.getClass().getInterfaces(),handler);</span><br><span class="line">        Object obj &#x3D; UserDaoInterface.work();</span><br><span class="line">        System.out.println(obj.getClass().getName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/06/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%85%AB/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java基础知识整理七" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/06/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%B8%83/">Java基础知识整理七：反射</a>
+    </h1>
+  
+
+        
+        <a href="/2020/09/06/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%B8%83/" class="archive-article-date">
+  	<time datetime="2020-09-06T00:55:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1、Class类实例的4种获取方式"><a href="#1、Class类实例的4种获取方式" class="headerlink" title="1、Class类实例的4种获取方式"></a>1、Class类实例的4种获取方式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 方式一 class属性</span><br><span class="line">Class class_1 &#x3D; Person.class;</span><br><span class="line">System.out.println(class_1);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 方式二 运行时类的对象</span><br><span class="line">Person p &#x3D; new Person();</span><br><span class="line">Class class_2 &#x3D; p.getClass();</span><br><span class="line">System.out.println(class_2);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 方式三 Class的静态方法</span><br><span class="line">String name &#x3D; &quot;com.atguigu.exer.Person&quot;;</span><br><span class="line">Class class_3 &#x3D; Class.forName(name);</span><br><span class="line">System.out.println(class_3);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 方式四 类的加载器</span><br><span class="line">ClassLoader classLoader &#x3D; this.getClass().getClassLoader();</span><br><span class="line">Class class_4 &#x3D; classLoader.loadClass(name);</span><br><span class="line">System.out.println(class_4);</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、类的加载"><a href="#2、类的加载" class="headerlink" title="2、类的加载"></a>2、类的加载</h2><p>类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方法区内，然后在堆区创建一个 java.lang.Class对象，用来封装类在方法区内的数据结构。</p>
+<p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599365681561&di=baef06a13c3a98954fc487bfdaee47c4&imgtype=0&src=http://image.mamicode.com/info/201808/20180818173157987352.png" alt="类的加载流程" title="类的加载流程"></p>
+<p>引导类加载器（bootstrap class loader）：它用来加载 Java 的核心库，是用原生代码来实现的，并不继承自 java.lang.ClassLoader 。<br>扩展类加载器（extensions class loader）：它用来加载 Java 的扩展库。Java 虚拟机的实现会提供一个扩展库目录。该类加载器在此目录里面查找并加载 Java 类。<br>系统类加载器（system class loader）：它根据 Java 应用的类路径（CLASSPATH）来加载 Java 类。一般来说，Java 应用的类都是由它来完成加载的。可以通过 ClassLoader.getSystemClassLoader() 来获取它。</p>
+<p><img src="https://developer.ibm.com/developer/default/articles/j-lo-classloader/images/image001.jpg" alt="类加载器" title="类加载器"></p>
+<h2 id="3、类的创建"><a href="#3、类的创建" class="headerlink" title="3、类的创建"></a>3、类的创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 方式一 newInstance()调用无参构造器</span><br><span class="line">Person obj_1 &#x3D; (Person) class_1.newInstance();</span><br><span class="line">System.out.println(obj_1);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 方式二 调用有参构造器</span><br><span class="line">Constructor ccc &#x3D;  class_1.getConstructor(String.class, int.class, String.class);</span><br><span class="line">Person obj_2 &#x3D; (Person)ccc.newInstance(&quot;张三&quot;,20,&quot;男&quot;);</span><br><span class="line">System.out.println(obj_2.toString());</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、类的属性"><a href="#4、类的属性" class="headerlink" title="4、类的属性"></a>4、类的属性</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">fields &#x3D; class_1.getDeclaredFields();</span><br><span class="line">for (Field f : fields) &#123;</span><br><span class="line">    System.out.println(f);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 权限修饰符</span><br><span class="line">    int modifiers &#x3D; f.getModifiers();</span><br><span class="line">    System.out.println(modifiers + &quot; &quot; + Modifier.toString(f.getModifiers()));</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 数据类型</span><br><span class="line">    Class type &#x3D; f.getType();</span><br><span class="line">    System.out.println(type.getName());</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 变量名</span><br><span class="line">    System.out.println(f.getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7、类的方法"><a href="#7、类的方法" class="headerlink" title="7、类的方法"></a>7、类的方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Method[] method &#x3D; class_1.getDeclaredMethods();</span><br><span class="line">for (Method m : method) &#123;</span><br><span class="line">    &#x2F;&#x2F; 权限修饰符</span><br><span class="line">    int modifiers &#x3D; m.getModifiers();</span><br><span class="line">    System.out.println(modifiers + &quot; &quot; + Modifier.toString(m.getModifiers()));</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 返回值类型</span><br><span class="line">    System.out.println(m.getReturnType().getName());</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 方法名</span><br><span class="line">    System.out.println(m.getName());</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 形参列表</span><br><span class="line">    Class[] parameterType &#x3D; m.getParameterTypes();</span><br><span class="line">    for (Class param : parameterType) &#123;</span><br><span class="line">        System.out.print(param.getName() + &quot; &quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/06/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%B8%83/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Java基础知识整理六" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/08/19/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%85%AD/">Java基础知识整理六：List接口</a>
+    </h1>
+  
+
+        
+        <a href="/2020/08/19/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%85%AD/" class="archive-article-date">
+  	<time datetime="2020-08-19T12:57:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1、List继承关系"><a href="#1、List继承关系" class="headerlink" title="1、List继承关系"></a>1、List继承关系</h2><p><img src="https://picb.zhimg.com/80/v2-803bdf7450d9779a08268a8f154bf6d4_720w.jpg" alt="List继承关系" title="List继承关系"></p>
+<h2 id="2、List常见方法"><a href="#2、List常见方法" class="headerlink" title="2、List常见方法"></a>2、List常见方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">1、boolean add(E e) </span><br><span class="line">将指定的元素追加到此列表的末尾。  </span><br><span class="line">2、void add(int index, E element) </span><br><span class="line">在此列表中的指定位置插入指定的元素。  </span><br><span class="line">3、boolean addAll(Collection&lt;? extends E&gt; c) </span><br><span class="line">按指定集合的Iterator返回的顺序将指定集合中的所有元素追加到此列表的末尾。  </span><br><span class="line">4、boolean addAll(int index, Collection&lt;? extends E&gt; c) </span><br><span class="line">将指定集合中的所有元素插入到此列表中，从指定的位置开始。</span><br><span class="line">5、int indexOf(Object o) </span><br><span class="line">返回此列表中指定元素的第一次出现的索引，如果此列表不包含元素，则返回-1。 </span><br><span class="line">6、int lastIndexOf(Object o) </span><br><span class="line">返回此列表中指定元素的最后一次出现的索引，如果此列表不包含元素，则返回-1。  </span><br><span class="line">7、E remove(int index)  （重载方法）</span><br><span class="line">删除该列表中指定位置的元素。 </span><br><span class="line">8、E set(int index, E element) </span><br><span class="line">用指定的元素替换此列表中指定位置的元素。 </span><br><span class="line">9、List&lt;E&gt; subList(int fromIndex, int toIndex) </span><br><span class="line">返回此列表中指定的 fromIndex （包括）和 toIndex之间的独占视图。  </span><br></pre></td></tr></table></figure>
+
+<h2 id="3、ArrayList源码阅读-JDK7"><a href="#3、ArrayList源码阅读-JDK7" class="headerlink" title="3、ArrayList源码阅读 JDK7"></a>3、ArrayList源码阅读 JDK7</h2><p>JDK8变化是第一次调用add时，底层才创建长度10的数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;3.1 构造函数</span><br><span class="line">public ArrayList(int initialCapacity) &#123;</span><br><span class="line">    if (initialCapacity &gt; 0) &#123;</span><br><span class="line">        this.elementData &#x3D; new Object[initialCapacity];</span><br><span class="line">    &#125; else if (initialCapacity &#x3D;&#x3D; 0) &#123;</span><br><span class="line">        this.elementData &#x3D; EMPTY_ELEMENTDATA;  &#x2F;&#x2F; 空数组</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        throw new IllegalArgumentException(&quot;Illegal Capacity: &quot;+</span><br><span class="line">                                            initialCapacity);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public ArrayList() &#123;</span><br><span class="line">    &#x2F;&#x2F; 默认容量为10</span><br><span class="line">    this.elementData &#x3D; DEFAULTCAPACITY_EMPTY_ELEMENTDATA;</span><br><span class="line">&#125;</span><br><span class="line">public ArrayList(Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">    elementData &#x3D; c.toArray();</span><br><span class="line">    if ((size &#x3D; elementData.length) !&#x3D; 0) &#123;</span><br><span class="line">        &#x2F;&#x2F; c.toArray might (incorrectly) not return Object[] (see 6260652)</span><br><span class="line">        &#x2F;&#x2F; 类型转换</span><br><span class="line">        if (elementData.getClass() !&#x3D; Object[].class)</span><br><span class="line">            elementData &#x3D; Arrays.copyOf(elementData, size, Object[].class);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        &#x2F;&#x2F; replace with empty array.</span><br><span class="line">        this.elementData &#x3D; EMPTY_ELEMENTDATA;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 3.2 add相关</span><br><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    ensureCapacityInternal(size + 1);  &#x2F;&#x2F; Increments modCount!!</span><br><span class="line">    elementData[size++] &#x3D; e;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 检查容量</span><br><span class="line">private void ensureCapacityInternal(int minCapacity) &#123;</span><br><span class="line">    ensureExplicitCapacity(calculateCapacity(elementData, minCapacity));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void ensureExplicitCapacity(int minCapacity) &#123;</span><br><span class="line">    modCount++;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; overflow-conscious code</span><br><span class="line">    if (minCapacity - elementData.length &gt; 0)</span><br><span class="line">        grow(minCapacity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void grow(int minCapacity) &#123;</span><br><span class="line">    &#x2F;&#x2F; overflow-conscious code</span><br><span class="line">    int oldCapacity &#x3D; elementData.length;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 默认扩容为原来的1.5倍</span><br><span class="line">    int newCapacity &#x3D; oldCapacity + (oldCapacity &gt;&gt; 1);</span><br><span class="line">    if (newCapacity - minCapacity &lt; 0)</span><br><span class="line">        newCapacity &#x3D; minCapacity;</span><br><span class="line">    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span><br><span class="line">        newCapacity &#x3D; hugeCapacity(minCapacity);</span><br><span class="line">    &#x2F;&#x2F; minCapacity is usually close to size, so this is a win:</span><br><span class="line">    elementData &#x3D; Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 3.3 addAll相关</span><br><span class="line">public boolean addAll(Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">    Object[] a &#x3D; c.toArray();</span><br><span class="line">    int numNew &#x3D; a.length;</span><br><span class="line">    ensureCapacityInternal(size + numNew);  &#x2F;&#x2F; Increments modCount</span><br><span class="line">    System.arraycopy(a, 0, elementData, size, numNew);</span><br><span class="line">    size +&#x3D; numNew;</span><br><span class="line">    return numNew !&#x3D; 0;</span><br><span class="line">&#125;</span><br><span class="line">public boolean addAll(int index, Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">    rangeCheckForAdd(index);</span><br><span class="line"></span><br><span class="line">    Object[] a &#x3D; c.toArray();</span><br><span class="line">    int numNew &#x3D; a.length;</span><br><span class="line">    ensureCapacityInternal(size + numNew);  &#x2F;&#x2F; Increments modCount</span><br><span class="line"></span><br><span class="line">    int numMoved &#x3D; size - index;</span><br><span class="line">    if (numMoved &gt; 0)</span><br><span class="line">        System.arraycopy(elementData, index, elementData, index + numNew,</span><br><span class="line">                            numMoved);</span><br><span class="line"></span><br><span class="line">    System.arraycopy(a, 0, elementData, index, numNew);</span><br><span class="line">    size +&#x3D; numNew;</span><br><span class="line">    return numNew !&#x3D; 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 3.4 index相关</span><br><span class="line">public int indexOf(Object o) &#123;</span><br><span class="line">    if (o &#x3D;&#x3D; null) &#123;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; size; i++)</span><br><span class="line">            if (elementData[i]&#x3D;&#x3D;null)</span><br><span class="line">                return i;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; size; i++)</span><br><span class="line">            if (o.equals(elementData[i]))</span><br><span class="line">                return i;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br><span class="line">public int lastIndexOf(Object o) &#123;</span><br><span class="line">    if (o &#x3D;&#x3D; null) &#123;</span><br><span class="line">        for (int i &#x3D; size-1; i &gt;&#x3D; 0; i--)</span><br><span class="line">            if (elementData[i]&#x3D;&#x3D;null)</span><br><span class="line">                return i;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        for (int i &#x3D; size-1; i &gt;&#x3D; 0; i--)</span><br><span class="line">            if (o.equals(elementData[i]))</span><br><span class="line">                return i;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 3.5 remove</span><br><span class="line">public E remove(int index) &#123;</span><br><span class="line">    rangeCheck(index);</span><br><span class="line"></span><br><span class="line">    modCount++;</span><br><span class="line">    E oldValue &#x3D; elementData(index);</span><br><span class="line"></span><br><span class="line">    int numMoved &#x3D; size - index - 1;</span><br><span class="line">    if (numMoved &gt; 0)</span><br><span class="line">        System.arraycopy(elementData, index+1, elementData, index,</span><br><span class="line">                            numMoved);</span><br><span class="line">    elementData[--size] &#x3D; null; &#x2F;&#x2F; clear to let GC do its work</span><br><span class="line"></span><br><span class="line">    return oldValue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 3.6 set</span><br><span class="line">public void set(E e) &#123;</span><br><span class="line">    &#x2F;&#x2F; lastRet上一个元素的索引位置</span><br><span class="line">    &#x2F;&#x2F; cursor下一个元素的索引位置</span><br><span class="line">    if (lastRet &lt; 0)</span><br><span class="line">        throw new IllegalStateException();</span><br><span class="line">    checkForComodification();</span><br><span class="line"></span><br><span class="line">    try &#123;</span><br><span class="line">        AbstractList.this.set(lastRet, e);</span><br><span class="line">        expectedModCount &#x3D; modCount;</span><br><span class="line">    &#125; catch (IndexOutOfBoundsException ex) &#123;</span><br><span class="line">        throw new ConcurrentModificationException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 表示修改次数</span><br><span class="line">&#x2F;&#x2F; 设置expectedModCount的目的保证在使用迭代器期间，只能通过迭代器且只能这一个迭代器进行</span><br><span class="line">final void checkForComodification() &#123;</span><br><span class="line">    if (modCount !&#x3D; expectedModCount)</span><br><span class="line">        throw new ConcurrentModificationException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、LinkedList源码阅读-JDK7"><a href="#4、LinkedList源码阅读-JDK7" class="headerlink" title="4、LinkedList源码阅读 JDK7"></a>4、LinkedList源码阅读 JDK7</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 4.1 构造函数</span><br><span class="line">public LinkedList(Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">    this();</span><br><span class="line">    addAll(c);</span><br><span class="line">&#125;</span><br><span class="line">public boolean addAll(Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">    return addAll(size, c);</span><br><span class="line">&#125;</span><br><span class="line">public boolean addAll(int index, Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">    checkPositionIndex(index);</span><br><span class="line"></span><br><span class="line">    Object[] a &#x3D; c.toArray();</span><br><span class="line">    int numNew &#x3D; a.length;</span><br><span class="line">    if (numNew &#x3D;&#x3D; 0)</span><br><span class="line">        return false;</span><br><span class="line"></span><br><span class="line">    Node&lt;E&gt; pred, succ;</span><br><span class="line">    &#x2F;&#x2F; 检查是否为尾部插入，记录插入位置</span><br><span class="line">    if (index &#x3D;&#x3D; size) &#123;</span><br><span class="line">        succ &#x3D; null;</span><br><span class="line">        pred &#x3D; last;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        succ &#x3D; node(index);</span><br><span class="line">        pred &#x3D; succ.prev;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for (Object o : a) &#123;</span><br><span class="line">        @SuppressWarnings(&quot;unchecked&quot;) E e &#x3D; (E) o;</span><br><span class="line">        Node&lt;E&gt; newNode &#x3D; new Node&lt;&gt;(pred, e, null);</span><br><span class="line">        if (pred &#x3D;&#x3D; null)</span><br><span class="line">            first &#x3D; newNode;</span><br><span class="line">        else</span><br><span class="line">            pred.next &#x3D; newNode;</span><br><span class="line">        pred &#x3D; newNode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (succ &#x3D;&#x3D; null) &#123;</span><br><span class="line">        last &#x3D; pred;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        pred.next &#x3D; succ;</span><br><span class="line">        succ.prev &#x3D; pred;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    size +&#x3D; numNew;</span><br><span class="line">    modCount++;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 4.2 add</span><br><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    linkLast(e);</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line">void linkLast(E e) &#123;</span><br><span class="line">    final Node&lt;E&gt; l &#x3D; last;</span><br><span class="line">    final Node&lt;E&gt; newNode &#x3D; new Node&lt;&gt;(l, e, null);</span><br><span class="line">    last &#x3D; newNode;</span><br><span class="line">    if (l &#x3D;&#x3D; null)</span><br><span class="line">        first &#x3D; newNode;</span><br><span class="line">    else</span><br><span class="line">        l.next &#x3D; newNode;</span><br><span class="line">    size++;</span><br><span class="line">    modCount++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 4.3 addAll相关</span><br><span class="line">public boolean addAll(Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">    return addAll(size, c);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 4.4 index相关</span><br><span class="line">public int indexOf(Object o) &#123;</span><br><span class="line">    int index &#x3D; 0;</span><br><span class="line">    if (o &#x3D;&#x3D; null) &#123;</span><br><span class="line">        for (Node&lt;E&gt; x &#x3D; first; x !&#x3D; null; x &#x3D; x.next) &#123;</span><br><span class="line">            if (x.item &#x3D;&#x3D; null)</span><br><span class="line">                return index;</span><br><span class="line">            index++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        for (Node&lt;E&gt; x &#x3D; first; x !&#x3D; null; x &#x3D; x.next) &#123;</span><br><span class="line">            if (o.equals(x.item))</span><br><span class="line">                return index;</span><br><span class="line">            index++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br><span class="line">public int lastIndexOf(Object o) &#123;</span><br><span class="line">    int index &#x3D; size;</span><br><span class="line">    if (o &#x3D;&#x3D; null) &#123;</span><br><span class="line">        for (Node&lt;E&gt; x &#x3D; last; x !&#x3D; null; x &#x3D; x.prev) &#123;</span><br><span class="line">            index--;</span><br><span class="line">            if (x.item &#x3D;&#x3D; null)</span><br><span class="line">                return index;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        for (Node&lt;E&gt; x &#x3D; last; x !&#x3D; null; x &#x3D; x.prev) &#123;</span><br><span class="line">            index--;</span><br><span class="line">            if (o.equals(x.item))</span><br><span class="line">                return index;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 4.5 remove</span><br><span class="line">public E remove() &#123;</span><br><span class="line">    return removeFirst();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 删除第一个元素</span><br><span class="line">public E removeFirst() &#123;</span><br><span class="line">    final Node&lt;E&gt; f &#x3D; first;</span><br><span class="line">    if (f &#x3D;&#x3D; null)</span><br><span class="line">        throw new NoSuchElementException();</span><br><span class="line">    return unlinkFirst(f);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 删除指定元素</span><br><span class="line">public boolean remove(Object o) &#123;</span><br><span class="line">    if (o &#x3D;&#x3D; null) &#123;</span><br><span class="line">        for (Node&lt;E&gt; x &#x3D; first; x !&#x3D; null; x &#x3D; x.next) &#123;</span><br><span class="line">            if (x.item &#x3D;&#x3D; null) &#123;</span><br><span class="line">                unlink(x);</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        for (Node&lt;E&gt; x &#x3D; first; x !&#x3D; null; x &#x3D; x.next) &#123;</span><br><span class="line">            if (o.equals(x.item)) &#123;</span><br><span class="line">                unlink(x);</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 删除指定索引对应元素</span><br><span class="line">public E remove(int index) &#123;</span><br><span class="line">    checkElementIndex(index);</span><br><span class="line">    return unlink(node(index));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 搜索index索引对应元素</span><br><span class="line">Node&lt;E&gt; node(int index) &#123;</span><br><span class="line">    &#x2F;&#x2F; assert isElementIndex(index);</span><br><span class="line"></span><br><span class="line">    if (index &lt; (size &gt;&gt; 1)) &#123;</span><br><span class="line">        Node&lt;E&gt; x &#x3D; first;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; index; i++)</span><br><span class="line">            x &#x3D; x.next;</span><br><span class="line">        return x;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        Node&lt;E&gt; x &#x3D; last;</span><br><span class="line">        for (int i &#x3D; size - 1; i &gt; index; i--)</span><br><span class="line">            x &#x3D; x.prev;</span><br><span class="line">        return x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 删除结点</span><br><span class="line">E unlink(Node&lt;E&gt; x) &#123;</span><br><span class="line">    &#x2F;&#x2F; assert x !&#x3D; null;</span><br><span class="line">    final E element &#x3D; x.item;</span><br><span class="line">    final Node&lt;E&gt; next &#x3D; x.next;</span><br><span class="line">    final Node&lt;E&gt; prev &#x3D; x.prev;</span><br><span class="line"></span><br><span class="line">    if (prev &#x3D;&#x3D; null) &#123;</span><br><span class="line">        first &#x3D; next;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        prev.next &#x3D; next;</span><br><span class="line">        x.prev &#x3D; null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (next &#x3D;&#x3D; null) &#123;</span><br><span class="line">        last &#x3D; prev;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        next.prev &#x3D; prev;</span><br><span class="line">        x.next &#x3D; null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    x.item &#x3D; null;</span><br><span class="line">    size--;</span><br><span class="line">    modCount++;</span><br><span class="line">    return element;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、Vector源码阅读-JDK7"><a href="#5、Vector源码阅读-JDK7" class="headerlink" title="5、Vector源码阅读 JDK7"></a>5、Vector源码阅读 JDK7</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 5.1 构造函数</span><br><span class="line">&#x2F;&#x2F; 默认容量10</span><br><span class="line">public Vector() &#123;</span><br><span class="line">    this(10);</span><br><span class="line">&#125;</span><br><span class="line">public Vector(int initialCapacity) &#123;</span><br><span class="line">    this(initialCapacity, 0);</span><br><span class="line">&#125;</span><br><span class="line">public Vector(int initialCapacity, int capacityIncrement) &#123;</span><br><span class="line">    super();</span><br><span class="line">    if (initialCapacity &lt; 0)</span><br><span class="line">        throw new IllegalArgumentException(&quot;Illegal Capacity: &quot;+</span><br><span class="line">                                            initialCapacity);</span><br><span class="line">    this.elementData &#x3D; new Object[initialCapacity];</span><br><span class="line">    this.capacityIncrement &#x3D; capacityIncrement;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 5.2 add</span><br><span class="line">public void add(int index, E element) &#123;</span><br><span class="line">    insertElementAt(element, index);</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; 引入线程安全</span><br><span class="line">public synchronized void insertElementAt(E obj, int index) &#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    if (index &gt; elementCount) &#123;</span><br><span class="line">        throw new ArrayIndexOutOfBoundsException(index</span><br><span class="line">                                                    + &quot; &gt; &quot; + elementCount);</span><br><span class="line">    &#125;</span><br><span class="line">    ensureCapacityHelper(elementCount + 1);</span><br><span class="line">    System.arraycopy(elementData, index, elementData, index + 1, elementCount - index);</span><br><span class="line">    elementData[index] &#x3D; obj;</span><br><span class="line">    elementCount++;</span><br><span class="line">&#125;</span><br><span class="line">private void ensureCapacityHelper(int minCapacity) &#123;</span><br><span class="line">    &#x2F;&#x2F; overflow-conscious code</span><br><span class="line">    if (minCapacity - elementData.length &gt; 0)</span><br><span class="line">        grow(minCapacity);</span><br><span class="line">&#125;</span><br><span class="line">private void grow(int minCapacity) &#123;</span><br><span class="line">    &#x2F;&#x2F; overflow-conscious code</span><br><span class="line">    int oldCapacity &#x3D; elementData.length;</span><br><span class="line">    &#x2F;&#x2F; 默认容量扩充为2倍</span><br><span class="line">    int newCapacity &#x3D; oldCapacity + ((capacityIncrement &gt; 0) ?</span><br><span class="line">                                        capacityIncrement : oldCapacity);</span><br><span class="line">    if (newCapacity - minCapacity &lt; 0)</span><br><span class="line">        newCapacity &#x3D; minCapacity;</span><br><span class="line">    if (newCapacity - MAX_ARRAY_SIZE &gt; 0)</span><br><span class="line">        newCapacity &#x3D; hugeCapacity(minCapacity);</span><br><span class="line">    elementData &#x3D; Arrays.copyOf(elementData, newCapacity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 5.3 addAll相关</span><br><span class="line">public synchronized boolean addAll(Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">    modCount++;</span><br><span class="line">    Object[] a &#x3D; c.toArray();</span><br><span class="line">    int numNew &#x3D; a.length;</span><br><span class="line">    ensureCapacityHelper(elementCount + numNew);</span><br><span class="line">    System.arraycopy(a, 0, elementData, elementCount, numNew);</span><br><span class="line">    elementCount +&#x3D; numNew;</span><br><span class="line">    return numNew !&#x3D; 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/08/19/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E5%85%AD/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-AI-PC端加速一：RGB转灰度图" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -164,7 +524,11 @@
       
         <h2 id="1、RGB转灰度图SSE实现一源码阅读"><a href="#1、RGB转灰度图SSE实现一源码阅读" class="headerlink" title="1、RGB转灰度图SSE实现一源码阅读"></a>1、RGB转灰度图SSE实现一源码阅读</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;sse 一次处理12个</span><br><span class="line">void RGB2Y_4(unsigned char *Src, unsigned char *Dest, int Width, int Height, int Stride) &#123;</span><br><span class="line">    const int B_WT &#x3D; int(0.114 * 256 + 0.5);</span><br><span class="line">    const int G_WT &#x3D; int(0.587 * 256 + 0.5);</span><br><span class="line">    const int R_WT &#x3D; 256 - B_WT - G_WT; &#x2F;&#x2F; int(0.299 * 256 + 0.5)</span><br><span class="line"></span><br><span class="line">    for (int Y &#x3D; 0; Y &lt; Height; Y++) &#123;</span><br><span class="line">        unsigned char *LinePS &#x3D; Src + Y * Stride;</span><br><span class="line">        unsigned char *LinePD &#x3D; Dest + Y * Width;</span><br><span class="line">        int X &#x3D; 0;</span><br><span class="line">        for (; X &lt; Width - 12; X +&#x3D; 12, LinePS +&#x3D; 36) &#123;</span><br><span class="line">            &#x2F;&#x2F;  (B1  G1  R1  B2  G2  R2  B3  G3) x (B_WT  G_WT  R_WT  B_WT  G_WT  R_WT  B_WT  G_WT)</span><br><span class="line">            __m128i p1aL &#x3D; _mm_mullo_epi16(_mm_cvtepu8_epi16(_mm_loadu_si128((__m128i *)(LinePS + 0))), _mm_setr_epi16(B_WT, G_WT, R_WT, B_WT, G_WT, R_WT, B_WT, G_WT)); &#x2F;&#x2F;1</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; (G1  R1  B2  G2  R2  B3  G3  R3)  x (G_WT  R_WT  B_WT  G_WT  R_WT  B_WT  G_WT  R_WT) </span><br><span class="line">            __m128i p2aL &#x3D; _mm_mullo_epi16(_mm_cvtepu8_epi16(_mm_loadu_si128((__m128i *)(LinePS + 1))), _mm_setr_epi16(G_WT, R_WT, B_WT, G_WT, R_WT, B_WT, G_WT, R_WT)); &#x2F;&#x2F;2</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; (R1  B2  G2  R2  B3  G3  R3  B4)  x (R_WT  B_WT  G_WT  R_WT  B_WT  G_WT  R_WT  B_WT) </span><br><span class="line">            __m128i p3aL &#x3D; _mm_mullo_epi16(_mm_cvtepu8_epi16(_mm_loadu_si128((__m128i *)(LinePS + 2))), _mm_setr_epi16(R_WT, B_WT, G_WT, R_WT, B_WT, G_WT, R_WT, B_WT)); &#x2F;&#x2F;3</span><br><span class="line"></span><br><span class="line">            _m128i p1aH &#x3D; _mm_mullo_epi16(_mm_cvtepu8_epi16(_mm_loadu_si128((__m128i *)(LinePS + 8))), _mm_setr_epi16(R_WT, B_WT, G_WT, R_WT, B_WT, G_WT, R_WT, B_WT));&#x2F;&#x2F;4</span><br><span class="line">            __m128i p2aH &#x3D; _mm_mullo_epi16(_mm_cvtepu8_epi16(_mm_loadu_si128((__m128i *)(LinePS + 9))), _mm_setr_epi16(B_WT, G_WT, R_WT, B_WT, G_WT, R_WT, B_WT, G_WT));&#x2F;&#x2F;5</span><br><span class="line">            __m128i p3aH &#x3D; _mm_mullo_epi16(_mm_cvtepu8_epi16(_mm_loadu_si128((__m128i *)(LinePS + 10))), _mm_setr_epi16(G_WT, R_WT, B_WT, G_WT, R_WT, B_WT, G_WT, R_WT));&#x2F;&#x2F;6</span><br><span class="line"></span><br><span class="line">            __m128i p1bL &#x3D; _mm_mullo_epi16(_mm_cvtepu8_epi16(_mm_loadu_si128((__m128i *)(LinePS + 18))), _mm_setr_epi16(B_WT, G_WT, R_WT, B_WT, G_WT, R_WT, B_WT, G_WT));&#x2F;&#x2F;7</span><br><span class="line">            __m128i p2bL &#x3D; _mm_mullo_epi16(_mm_cvtepu8_epi16(_mm_loadu_si128((__m128i *)(LinePS + 19))), _mm_setr_epi16(G_WT, R_WT, B_WT, G_WT, R_WT, B_WT, G_WT, R_WT));&#x2F;&#x2F;8</span><br><span class="line">            __m128i p3bL &#x3D; _mm_mullo_epi16(_mm_cvtepu8_epi16(_mm_loadu_si128((__m128i *)(LinePS + 20))), _mm_setr_epi16(R_WT, B_WT, G_WT, R_WT, B_WT, G_WT, R_WT, B_WT));&#x2F;&#x2F;9</span><br><span class="line"></span><br><span class="line">            __m128i p1bH &#x3D; _mm_mullo_epi16(_mm_cvtepu8_epi16(_mm_loadu_si128((__m128i *)(LinePS + 26))), _mm_setr_epi16(R_WT, B_WT, G_WT, R_WT, B_WT, G_WT, R_WT, B_WT));&#x2F;&#x2F;10</span><br><span class="line">            __m128i p2bH &#x3D; _mm_mullo_epi16(_mm_cvtepu8_epi16(_mm_loadu_si128((__m128i *)(LinePS + 27))), _mm_setr_epi16(B_WT, G_WT, R_WT, B_WT, G_WT, R_WT, B_WT, G_WT));&#x2F;&#x2F;11</span><br><span class="line">            __m128i p3bH &#x3D; _mm_mullo_epi16(_mm_cvtepu8_epi16(_mm_loadu_si128((__m128i *)(LinePS + 28))), _mm_setr_epi16(G_WT, R_WT, B_WT, G_WT, R_WT, B_WT, G_WT, R_WT));&#x2F;&#x2F;12</span><br><span class="line"></span><br><span class="line">            __m128i sumaL &#x3D; _mm_add_epi16(p3aL, _mm_add_epi16(p1aL, p2aL));&#x2F;&#x2F;13</span><br><span class="line">            __m128i sumaH &#x3D; _mm_add_epi16(p3aH, _mm_add_epi16(p1aH, p2aH));&#x2F;&#x2F;14</span><br><span class="line">            __m128i sumbL &#x3D; _mm_add_epi16(p3bL, _mm_add_epi16(p1bL, p2bL));&#x2F;&#x2F;15</span><br><span class="line">            __m128i sumbH &#x3D; _mm_add_epi16(p3bH, _mm_add_epi16(p1bH, p2bH));&#x2F;&#x2F;16</span><br><span class="line">            __m128i sclaL &#x3D; _mm_srli_epi16(sumaL, 8);&#x2F;&#x2F;17</span><br><span class="line">            __m128i sclaH &#x3D; _mm_srli_epi16(sumaH, 8);&#x2F;&#x2F;18</span><br><span class="line">            __m128i sclbL &#x3D; _mm_srli_epi16(sumbL, 8);&#x2F;&#x2F;19</span><br><span class="line">            __m128i sclbH &#x3D; _mm_srli_epi16(sumbH, 8);&#x2F;&#x2F;20</span><br><span class="line">    </span><br><span class="line">            __m128i shftaL &#x3D; _mm_shuffle_epi8(sclaL, _mm_setr_epi8(0, 6, 12, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1));&#x2F;&#x2F;21</span><br><span class="line">            __m128i shftaH &#x3D; _mm_shuffle_epi8(sclaH, _mm_setr_epi8(-1, -1, -1, 18, 24, 30, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1));&#x2F;&#x2F;22</span><br><span class="line">            __m128i shftbL &#x3D; _mm_shuffle_epi8(sclbL, _mm_setr_epi8(-1, -1, -1, -1, -1, -1, 0, 6, 12, -1, -1, -1, -1, -1, -1, -1));&#x2F;&#x2F;23</span><br><span class="line">            __m128i shftbH &#x3D; _mm_shuffle_epi8(sclbH, _mm_setr_epi8(-1, -1, -1, -1, -1, -1, -1, -1, -1, 18, 24, 30, -1, -1, -1, -1));&#x2F;&#x2F;24</span><br><span class="line">            __m128i accumL &#x3D; _mm_or_si128(shftaL, shftbL);&#x2F;&#x2F;25</span><br><span class="line">            __m128i accumH &#x3D; _mm_or_si128(shftaH, shftbH);&#x2F;&#x2F;26</span><br><span class="line">            __m128i h3 &#x3D; _mm_or_si128(accumL, accumH);&#x2F;&#x2F;27</span><br><span class="line">            _mm_storeu_si128((__m128i *)(LinePD + X), h3);</span><br><span class="line">        &#125;</span><br><span class="line">        for (; X &lt; Width; X++, LinePS +&#x3D; 3) &#123;</span><br><span class="line">            LinePD[X] &#x3D; (B_WT * LinePS[0] + G_WT * LinePS[1] + R_WT * LinePS[2]) &gt;&gt; 8;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="2、RGB转灰度图SSE实现二源码阅读"><a href="#2、RGB转灰度图SSE实现二源码阅读" class="headerlink" title="2、RGB转灰度图SSE实现二源码阅读"></a>2、RGB转灰度图SSE实现二源码阅读</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; AVX2</span><br><span class="line">constexpr double B_WEIGHT &#x3D; 0.114;</span><br><span class="line">constexpr double G_WEIGHT &#x3D; 0.587;</span><br><span class="line">constexpr double R_WEIGHT &#x3D; 0.299;</span><br><span class="line">constexpr uint16_t B_WT &#x3D; static_cast&lt;uint16_t&gt;(32768.0 * B_WEIGHT + 0.5);</span><br><span class="line">constexpr uint16_t G_WT &#x3D; static_cast&lt;uint16_t&gt;(32768.0 * G_WEIGHT + 0.5);</span><br><span class="line">constexpr uint16_t R_WT &#x3D; static_cast&lt;uint16_t&gt;(32768.0 * R_WEIGHT + 0.5);</span><br><span class="line">static const __m256i weight_vec &#x3D; _mm256_setr_epi16(B_WT, G_WT, R_WT, B_WT, G_WT, R_WT, B_WT, G_WT, R_WT, B_WT, G_WT, R_WT, B_WT, G_WT, R_WT, B_WT);</span><br><span class="line"></span><br><span class="line">void  _RGB2Y(unsigned char* Src, const int32_t Width, const int32_t start_row, const int32_t thread_stride, const int32_t Stride, unsigned char* Dest)</span><br><span class="line">&#123;</span><br><span class="line">    for (int Y &#x3D; start_row; Y &lt; start_row + thread_stride; Y++)</span><br><span class="line">    &#123;</span><br><span class="line">        unsigned char *LinePS &#x3D; Src + Y * Stride;</span><br><span class="line">        unsigned char *LinePD &#x3D; Dest + Y * Width;</span><br><span class="line">        int X &#x3D; 0;</span><br><span class="line">        for (; X &lt; Width - 10; X +&#x3D; 10, LinePS +&#x3D; 30)</span><br><span class="line">        &#123;</span><br><span class="line">            &#x2F;&#x2F;B1 G1 R1 B2 G2 R2 B3 G3 R3 B4 G4 R4 B5 G5 R5 B6 </span><br><span class="line">            __m256i temp &#x3D; _mm256_cvtepu8_epi16(_mm_loadu_si128((const __m128i*)(LinePS + 0)));</span><br><span class="line">            __m256i in1 &#x3D; _mm256_mulhrs_epi16(temp, weight_vec);</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F;B6 G6 R6 B7 G7 R7 B8 G8 R8 B9 G9 R9 B10 G10 R10 B11</span><br><span class="line">            temp &#x3D; _mm256_cvtepu8_epi16(_mm_loadu_si128((const __m128i*)(LinePS + 15)));</span><br><span class="line">            __m256i in2 &#x3D; _mm256_mulhrs_epi16(temp, weight_vec);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F;0  1  2  3   4  5  6  7  8  9  10 11 12 13 14 15    16 17 18 19 20 21 22 23 24 25 26 27 28   29 30  31       </span><br><span class="line">            &#x2F;&#x2F;B1 G1 R1 B2 G2 R2 B3 G3  B6 G6 R6 B7 G7 R7 B8 G8    R3 B4 G4 R4 B5 G5 R5 B6 R8 B9 G9 R9 B10 G10 R10 B11</span><br><span class="line">            __m256i mul &#x3D; _mm256_packus_epi16(in1, in2);</span><br><span class="line"></span><br><span class="line">            __m256i b1 &#x3D; _mm256_shuffle_epi8(mul, _mm256_setr_epi8(</span><br><span class="line">                &#x2F;&#x2F;  B1 B2 B3 -1, -1, -1  B7  B8  -1, -1, -1, -1, -1, -1, -1, -1,</span><br><span class="line">                0, 3, 6, -1, -1, -1, 11, 14, -1, -1, -1, -1, -1, -1, -1, -1,</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F;  -1, -1, -1, B4 B5 B6 -1, -1  B9 B10 -1, -1, -1, -1, -1, -1</span><br><span class="line">                -1, -1, -1, 1, 4, 7, -1, -1, 9, 12, -1, -1, -1, -1, -1, -1));</span><br><span class="line"></span><br><span class="line">            __m256i g1 &#x3D; _mm256_shuffle_epi8(mul, _mm256_setr_epi8(</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F; G1 G2 G3 -1, -1  G6 G7  G8  -1, -1, -1, -1, -1, -1, -1, -1, </span><br><span class="line">                1, 4, 7, -1, -1, 9, 12, 15, -1, -1, -1, -1, -1, -1, -1, -1,</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F;  -1, -1, -1  G4 G5 -1, -1, -1  G9  G10 -1, -1, -1, -1, -1, -1    </span><br><span class="line">                -1, -1, -1, 2, 5, -1, -1, -1, 10, 13, -1, -1, -1, -1, -1, -1));</span><br><span class="line"></span><br><span class="line">            __m256i r1 &#x3D; _mm256_shuffle_epi8(mul, _mm256_setr_epi8(</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F;  R1 R2 -1  -1  -1  R6  R7  -1, -1, -1, -1, -1, -1, -1, -1, -1,    </span><br><span class="line">                2, 5, -1, -1, -1, 10, 13, -1, -1, -1, -1, -1, -1, -1, -1, -1,</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F;  -1, -1, R3 R4 R5 -1, -1, R8 R9  R10 -1, -1, -1, -1, -1, -1</span><br><span class="line">                -1, -1, 0, 3, 6, -1, -1, 8, 11, 14, -1, -1, -1, -1, -1, -1));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; B1+G1+R1  B2+G2+R2 B3+G3  0 0 G6+R6  B7+G7+R7 B8+G8 0 0 0 0 0 0 0 0 0 0 R3 B4+G4+R4 B5+G5+R5 B6 0 R8 B9+G9+R9 B10+G10+R10 0 0 0 0 0 0</span><br><span class="line"></span><br><span class="line">            __m256i accum &#x3D; _mm256_adds_epu8(r1, _mm256_adds_epu8(b1, g1));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; _mm256_castsi256_si128(accum)</span><br><span class="line">            &#x2F;&#x2F; B1+G1+R1  B2+G2+R2 B3+G3  0 0 G6+R6  B7+G7+R7 B8+G8 0 0 0 0 0 0 0 0</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; _mm256_extracti128_si256(accum, 1)</span><br><span class="line">            &#x2F;&#x2F; 0 0 R3 B4+G4+R4 B5+G5+R5 B6 0 R8 B9+G9+R9 B10+G10+R10 0 0 0 0 0 0</span><br><span class="line"></span><br><span class="line">            __m128i h3 &#x3D; _mm_adds_epu8(_mm256_castsi256_si128(accum), _mm256_extracti128_si256(accum, 1));</span><br><span class="line"></span><br><span class="line">            _mm_storeu_si128((__m128i *)(LinePD + X), h3);</span><br><span class="line">        &#125;</span><br><span class="line">        for (; X &lt; Width; X++, LinePS +&#x3D; 3) &#123;</span><br><span class="line">            int tmpB &#x3D; (B_WT * LinePS[0]) &gt;&gt; 14 + 1;</span><br><span class="line">            tmpB &#x3D; max(min(255, tmpB), 0);</span><br><span class="line"></span><br><span class="line">            int tmpG &#x3D; (G_WT * LinePS[1]) &gt;&gt; 14 + 1;</span><br><span class="line">            tmpG &#x3D; max(min(255, tmpG), 0);</span><br><span class="line"></span><br><span class="line">            int tmpR &#x3D; (R_WT * LinePS[2]) &gt;&gt; 14 + 1;</span><br><span class="line">            tmpR &#x3D; max(min(255, tmpR), 0);</span><br><span class="line"></span><br><span class="line">            int tmp &#x3D; tmpB + tmpG + tmpR;</span><br><span class="line">            LinePD[X] &#x3D; max(min(255, tmp), 0);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;avx2 </span><br><span class="line">void RGB2Y_6(unsigned char *Src, unsigned char *Dest, int width, int height, int stride)</span><br><span class="line">&#123;</span><br><span class="line">    _RGB2Y(Src, width, 0, height, stride, Dest);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2、RGB转灰度图SSE实现二源码阅读"><a href="#2、RGB转灰度图SSE实现二源码阅读" class="headerlink" title="2、RGB转灰度图SSE实现二源码阅读"></a>2、RGB转灰度图SSE实现二源码阅读</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; AVX2</span><br><span class="line">constexpr double B_WEIGHT &#x3D; 0.114;</span><br><span class="line">constexpr double G_WEIGHT &#x3D; 0.587;</span><br><span class="line">constexpr double R_WEIGHT &#x3D; 0.299;</span><br><span class="line">constexpr uint16_t B_WT &#x3D; static_cast&lt;uint16_t&gt;(32768.0 * B_WEIGHT + 0.5);</span><br><span class="line">constexpr uint16_t G_WT &#x3D; static_cast&lt;uint16_t&gt;(32768.0 * G_WEIGHT + 0.5);</span><br><span class="line">constexpr uint16_t R_WT &#x3D; static_cast&lt;uint16_t&gt;(32768.0 * R_WEIGHT + 0.5);</span><br><span class="line">static const __m256i weight_vec &#x3D; _mm256_setr_epi16(B_WT, G_WT, R_WT, B_WT, G_WT, R_WT, B_WT, G_WT, R_WT, B_WT, G_WT, R_WT, B_WT, G_WT, R_WT, B_WT);</span><br><span class="line"></span><br><span class="line">void  _RGB2Y(unsigned char* Src, const int32_t Width, const int32_t start_row, const int32_t thread_stride, const int32_t Stride, unsigned char* Dest)</span><br><span class="line">&#123;</span><br><span class="line">    for (int Y &#x3D; start_row; Y &lt; start_row + thread_stride; Y++)</span><br><span class="line">    &#123;</span><br><span class="line">        unsigned char *LinePS &#x3D; Src + Y * Stride;</span><br><span class="line">        unsigned char *LinePD &#x3D; Dest + Y * Width;</span><br><span class="line">        int X &#x3D; 0;</span><br><span class="line">        for (; X &lt; Width - 10; X +&#x3D; 10, LinePS +&#x3D; 30)</span><br><span class="line">        &#123;</span><br><span class="line">            &#x2F;&#x2F;B1 G1 R1 B2 G2 R2 B3 G3 | R3 B4 G4 R4 B5 G5 R5 B6 </span><br><span class="line">            __m256i temp &#x3D; _mm256_cvtepu8_epi16(_mm_loadu_si128((const __m128i*)(LinePS + 0)));</span><br><span class="line">            __m256i in1 &#x3D; _mm256_mulhrs_epi16(temp, weight_vec);</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F;B6 G6 R6 B7 G7 R7 B8 G8 | R8 B9 G9 R9 B10 G10 R10 B11</span><br><span class="line">            temp &#x3D; _mm256_cvtepu8_epi16(_mm_loadu_si128((const __m128i*)(LinePS + 15)));</span><br><span class="line">            __m256i in2 &#x3D; _mm256_mulhrs_epi16(temp, weight_vec);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F;0  1  2  3   4  5  6  7  8  9  10 11 12 13 14 15    16 17 18 19 20 21 22 23 24 25 26 27 28   29 30  31       </span><br><span class="line">            &#x2F;&#x2F;B1 G1 R1 B2 G2 R2 B3 G3  B6 G6 R6 B7 G7 R7 B8 G8    R3 B4 G4 R4 B5 G5 R5 B6 R8 B9 G9 R9 B10 G10 R10 B11</span><br><span class="line">            __m256i mul &#x3D; _mm256_packus_epi16(in1, in2);</span><br><span class="line"></span><br><span class="line">            __m256i b1 &#x3D; _mm256_shuffle_epi8(mul, _mm256_setr_epi8(</span><br><span class="line">                &#x2F;&#x2F;  B1 B2 B3 -1, -1, -1  B7  B8  -1, -1, -1, -1, -1, -1, -1, -1,</span><br><span class="line">                0, 3, 6, -1, -1, -1, 11, 14, -1, -1, -1, -1, -1, -1, -1, -1,</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F;  -1, -1, -1, B4 B5 B6 -1, -1  B9 B10 -1, -1, -1, -1, -1, -1</span><br><span class="line">                -1, -1, -1, 1, 4, 7, -1, -1, 9, 12, -1, -1, -1, -1, -1, -1));</span><br><span class="line"></span><br><span class="line">            __m256i g1 &#x3D; _mm256_shuffle_epi8(mul, _mm256_setr_epi8(</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F; G1 G2 G3 -1, -1  G6 G7  G8  -1, -1, -1, -1, -1, -1, -1, -1, </span><br><span class="line">                1, 4, 7, -1, -1, 9, 12, 15, -1, -1, -1, -1, -1, -1, -1, -1,</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F;  -1, -1, -1  G4 G5 -1, -1, -1  G9  G10 -1, -1, -1, -1, -1, -1    </span><br><span class="line">                -1, -1, -1, 2, 5, -1, -1, -1, 10, 13, -1, -1, -1, -1, -1, -1));</span><br><span class="line"></span><br><span class="line">            __m256i r1 &#x3D; _mm256_shuffle_epi8(mul, _mm256_setr_epi8(</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F;  R1 R2 -1  -1  -1  R6  R7  -1, -1, -1, -1, -1, -1, -1, -1, -1,    </span><br><span class="line">                2, 5, -1, -1, -1, 10, 13, -1, -1, -1, -1, -1, -1, -1, -1, -1,</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F;  -1, -1, R3 R4 R5 -1, -1, R8 R9  R10 -1, -1, -1, -1, -1, -1</span><br><span class="line">                -1, -1, 0, 3, 6, -1, -1, 8, 11, 14, -1, -1, -1, -1, -1, -1));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; B1+G1+R1  B2+G2+R2 B3+G3  0 0 G6+R6  B7+G7+R7 B8+G8 0 0 0 0 0 0 0 0 0 0 R3 B4+G4+R4 B5+G5+R5 B6 0 R8 B9+G9+R9 B10+G10+R10 0 0 0 0 0 0</span><br><span class="line"></span><br><span class="line">            __m256i accum &#x3D; _mm256_adds_epu8(r1, _mm256_adds_epu8(b1, g1));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; _mm256_castsi256_si128(accum)</span><br><span class="line">            &#x2F;&#x2F; B1+G1+R1  B2+G2+R2 B3+G3  0 0 G6+R6  B7+G7+R7 B8+G8 0 0 0 0 0 0 0 0</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; _mm256_extracti128_si256(accum, 1)</span><br><span class="line">            &#x2F;&#x2F; 0 0 R3 B4+G4+R4 B5+G5+R5 B6 0 R8 B9+G9+R9 B10+G10+R10 0 0 0 0 0 0</span><br><span class="line"></span><br><span class="line">            __m128i h3 &#x3D; _mm_adds_epu8(_mm256_castsi256_si128(accum), _mm256_extracti128_si256(accum, 1));</span><br><span class="line"></span><br><span class="line">            _mm_storeu_si128((__m128i *)(LinePD + X), h3);</span><br><span class="line">        &#125;</span><br><span class="line">        for (; X &lt; Width; X++, LinePS +&#x3D; 3) &#123;</span><br><span class="line">            int tmpB &#x3D; (B_WT * LinePS[0]) &gt;&gt; 14 + 1;</span><br><span class="line">            tmpB &#x3D; max(min(255, tmpB), 0);</span><br><span class="line"></span><br><span class="line">            int tmpG &#x3D; (G_WT * LinePS[1]) &gt;&gt; 14 + 1;</span><br><span class="line">            tmpG &#x3D; max(min(255, tmpG), 0);</span><br><span class="line"></span><br><span class="line">            int tmpR &#x3D; (R_WT * LinePS[2]) &gt;&gt; 14 + 1;</span><br><span class="line">            tmpR &#x3D; max(min(255, tmpR), 0);</span><br><span class="line"></span><br><span class="line">            int tmp &#x3D; tmpB + tmpG + tmpR;</span><br><span class="line">            LinePD[X] &#x3D; max(min(255, tmp), 0);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;avx2 </span><br><span class="line">void RGB2Y_6(unsigned char *Src, unsigned char *Dest, int width, int height, int stride)</span><br><span class="line">&#123;</span><br><span class="line">    _RGB2Y(Src, width, 0, height, stride, Dest);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、相关指令记录"><a href="#3、相关指令记录" class="headerlink" title="3、相关指令记录"></a>3、相关指令记录</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">_mm_loadu_si128 从未对齐的内存地址加载整型向量</span><br><span class="line">_mm_loadu_ps&#x2F;pd 从未对齐的内存地址加载浮点向量</span><br><span class="line">_mm_load_si128 从对齐的内存地址加载整型向量</span><br><span class="line">_mm_load_ps&#x2F;pd 从对齐的内存地址加载浮点向量</span><br><span class="line"></span><br><span class="line">_mm_setr_epi8&#x2F;epi16&#x2F;epi32&#x2F;epi64x  用若干个整型数的转置顺序初始化向量</span><br><span class="line">_mm_setr_ps&#x2F;pd 用4个float或者2个double的转置顺序初始化向量</span><br><span class="line"></span><br><span class="line">_mm256_mullo_epi16&#x2F;32 整数想乘，低位存储</span><br><span class="line">_mm256_mulhi_epi16&#x2F;32 整数想乘，高位存储</span><br><span class="line">_mm256_mulhi_epu16&#x2F;32 整数想乘，高位存储</span><br><span class="line">_mm256_mulhrs_epi16   16位数相乘得到32位数</span><br><span class="line"></span><br><span class="line">_mm_slli_epi16 (__m128i a, int count) 逻辑左移count位</span><br><span class="line">_mm_srli_epi16 (__m128i a, int count) 逻辑右移count位</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="4、-mm256-mulhrs-epi16示例"><a href="#4、-mm256-mulhrs-epi16示例" class="headerlink" title="4、_mm256_mulhrs_epi16示例"></a>4、_mm256_mulhrs_epi16示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">可以使用 _mm256_mulhrs_epi16执行此操作.这会进行定点乘法运算,因此您只需将被乘数向量设置为32768 &#x2F; b：</span><br><span class="line">inline __m256i _mm256_div_epi16 (const __m256i va, const int b)</span><br><span class="line">&#123;</span><br><span class="line">    __m256i vb &#x3D; _mm256_set1_epi16(32768 &#x2F; b);</span><br><span class="line">    return _mm256_mulhrs_epi16(va, vb);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -206,19 +570,19 @@
 
 
   
-    <article id="post-Java基础知识整理五：Collection接口" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Java基础知识整理五" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/17/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%BA%94%EF%BC%9ACollection%E6%8E%A5%E5%8F%A3/">Java基础知识整理五：Collection接口</a>
+      <a class="article-title" href="/2020/08/17/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%BA%94/">Java基础知识整理五：Collection接口</a>
     </h1>
   
 
         
-        <a href="/2020/08/17/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%BA%94%EF%BC%9ACollection%E6%8E%A5%E5%8F%A3/" class="archive-article-date">
+        <a href="/2020/08/17/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%BA%94/" class="archive-article-date">
   	<time datetime="2020-08-17T13:50:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-17</time>
 </a>
         
@@ -245,7 +609,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2020/08/17/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%BA%94%EF%BC%9ACollection%E6%8E%A5%E5%8F%A3/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/08/17/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%BA%94/">展开全文 >></a>
         </p>
       
 
@@ -483,478 +847,10 @@
 
 
   
-    <article id="post-Java基础知识整理二" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/11/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%BA%8C/">Java基础知识整理二：单例模式</a>
-    </h1>
-  
-
-        
-        <a href="/2020/08/11/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%BA%8C/" class="archive-article-date">
-  	<time datetime="2020-08-11T13:29:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1、单例模式"><a href="#1、单例模式" class="headerlink" title="1、单例模式"></a>1、单例模式</h2><p>单例类创建由自身完成，需要确保只有一个对象被创建。</p>
-<h2 id="2、懒汉式"><a href="#2、懒汉式" class="headerlink" title="2、懒汉式"></a>2、懒汉式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class LHSingleton &#123;</span><br><span class="line">    private LHSingleton() &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    private static LHSingleton instance &#x3D; null;</span><br><span class="line">    public static LHSingleton getInstance() &#123;</span><br><span class="line">        if (null &#x3D;&#x3D; instance)&#123;</span><br><span class="line">            instance &#x3D; new LHSingleton();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;LHSingleton.getInstance&quot;);</span><br><span class="line">        return instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="3、饿汉式"><a href="#3、饿汉式" class="headerlink" title="3、饿汉式"></a>3、饿汉式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class EHSingleton &#123;</span><br><span class="line">    private EHSingleton() &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    private static EHSingleton instance &#x3D; new EHSingleton();</span><br><span class="line">    public static EHSingleton getInstance() &#123;</span><br><span class="line">        System.out.println(&quot;EHSingleton.getInstance&quot;);</span><br><span class="line">        return instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="4、线程安全懒汉式"><a href="#4、线程安全懒汉式" class="headerlink" title="4、线程安全懒汉式"></a>4、线程安全懒汉式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class SLHSingleton &#123;</span><br><span class="line">    private SLHSingleton() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static SLHSingleton instance &#x3D; null;</span><br><span class="line">    public synchronized static SLHSingleton getInstance() &#123;</span><br><span class="line">        if (null &#x3D;&#x3D; instance)&#123;</span><br><span class="line">            instance &#x3D; new SLHSingleton();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;SLHSingleton.getInstance&quot;);</span><br><span class="line">        return instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="5、双重检验"><a href="#5、双重检验" class="headerlink" title="5、双重检验"></a>5、双重检验</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class MSLHSingleton &#123;</span><br><span class="line">    private MSLHSingleton() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static MSLHSingleton instance &#x3D; null;</span><br><span class="line">    public static MSLHSingleton getInstance() &#123;</span><br><span class="line">        if (null &#x3D;&#x3D; instance)&#123;</span><br><span class="line">            synchronized(MSLHSingleton.class) &#123;</span><br><span class="line">                if (null &#x3D;&#x3D; instance) &#123;</span><br><span class="line">                    instance &#x3D; new MSLHSingleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;MSLHSingleton.getInstance&quot;);</span><br><span class="line">        return instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在多线程环境下线程一执行 可能执行new对象:分配内存空间-引用赋值-初始化，当执行到引用赋值时，线程二会看到instance!=null，但对象此时并未初始化，出现空指针异常。这里可以采用volatile来禁止指令重排序。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class MSLHSingleton &#123;</span><br><span class="line">    private MSLHSingleton() &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private volatile static MSLHSingleton instance &#x3D; null;</span><br><span class="line">    public static MSLHSingleton getInstance() &#123;</span><br><span class="line">        if (null &#x3D;&#x3D; instance)&#123;</span><br><span class="line">            synchronized(MSLHSingleton.class) &#123;</span><br><span class="line">                if (null &#x3D;&#x3D; instance) &#123;</span><br><span class="line">                    instance &#x3D; new MSLHSingleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;MSLHSingleton.getInstance&quot;);</span><br><span class="line">        return instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="6、静态内部类模式（重点）"><a href="#6、静态内部类模式（重点）" class="headerlink" title="6、静态内部类模式（重点）"></a>6、静态内部类模式（重点）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public final class HSingleton &#123;</span><br><span class="line">    private HSingleton() &#123;</span><br><span class="line">        System.out.println(&quot;HSingleton()&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static HSingleton getInstance() &#123;</span><br><span class="line">        System.out.println(&quot;HSingleton.getInstance&quot;);</span><br><span class="line">        return Holder.instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static class Holder &#123;</span><br><span class="line">        private static HSingleton instance &#x3D; new HSingleton();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="7、枚举模式（重点）"><a href="#7、枚举模式（重点）" class="headerlink" title="7、枚举模式（重点）"></a>7、枚举模式（重点）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class EnumSingleton &#123;</span><br><span class="line">    private EnumSingleton() &#123;</span><br><span class="line">        System.out.println(&quot;EnumSingleton()&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static EnumSingleton getInstance() &#123;</span><br><span class="line">        System.out.println(&quot;EnumSingleton.getInstance&quot;);</span><br><span class="line">        return EnumSingleton.Holder.INSTANCE.instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private enum Holder &#123;</span><br><span class="line"></span><br><span class="line">        INSTANCE;</span><br><span class="line">        private EnumSingleton instance;</span><br><span class="line"></span><br><span class="line">        Holder() &#123;</span><br><span class="line">            instance &#x3D; new EnumSingleton();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/08/11/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%BA%8C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java基础知识整理一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/09/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%B8%80/">Java基础知识整理一：包装类、基本类型、String类</a>
-    </h1>
-  
-
-        
-        <a href="/2020/08/09/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%B8%80/" class="archive-article-date">
-  	<time datetime="2020-08-09T02:20:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1、包装类"><a href="#1、包装类" class="headerlink" title="1、包装类"></a>1、包装类</h2><p>包装类是对基本数据类型的封装，使其符合Java的面向对象特性，基本数据类型与包装类的对应关系如下所示。</p>
-<table>
-<thead>
-<tr>
-<th><strong>基本数据类型</strong></th>
-<th align="center"><strong>包装类</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>byte</td>
-<td align="center">Byte</td>
-</tr>
-<tr>
-<td>boolean</td>
-<td align="center">Boolean</td>
-</tr>
-<tr>
-<td>short</td>
-<td align="center">Short</td>
-</tr>
-<tr>
-<td>char</td>
-<td align="center">Character</td>
-</tr>
-<tr>
-<td>int</td>
-<td align="center">Integer</td>
-</tr>
-<tr>
-<td>long</td>
-<td align="center">Long</td>
-</tr>
-<tr>
-<td>float</td>
-<td align="center">Float</td>
-</tr>
-<tr>
-<td>double</td>
-<td align="center">Double</td>
-</tr>
-</tbody></table>
-<p>包装类的继承关系如下所示。<br><img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=811377248,1952076172&fm=26&gp=0.jpg" alt="包装类继承关系，转载自https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=811377248,1952076172&amp;fm=26&amp;gp=0.jpg" title="包装类继承关系"></p>
-<hr>
-<h2 id="2、包装类、基本类型、String类转换"><a href="#2、包装类、基本类型、String类转换" class="headerlink" title="2、包装类、基本类型、String类转换"></a>2、包装类、基本类型、String类转换</h2><h3 id="2-1-基本类型-gt-包装类"><a href="#2-1-基本类型-gt-包装类" class="headerlink" title="2.1 基本类型=&gt;包装类"></a>2.1 基本类型=&gt;包装类</h3><table>
-<thead>
-<tr>
-<th><strong>转换关系</strong></th>
-<th align="center"><strong>转换方式</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>byte-&gt;Byte</td>
-<td align="center">Byte(byte value)/static Byte.valueOf(byte b)</td>
-</tr>
-<tr>
-<td>boolean-&gt;Boolean</td>
-<td align="center">Boolean(boolean value)/static Boolean.valueOf(boolean b)</td>
-</tr>
-<tr>
-<td>short-&gt;Short</td>
-<td align="center">Short(short value)/static Short.valueOf(short b)</td>
-</tr>
-<tr>
-<td>char-&gt;Character</td>
-<td align="center">Character(char value)/static Character.valueOf(char b)</td>
-</tr>
-<tr>
-<td>long-&gt;Long</td>
-<td align="center">Long(long value)/static Long.valueOf(long b)</td>
-</tr>
-<tr>
-<td>float-&gt;Float</td>
-<td align="center">Float(float value)/static Float.valueOf(float b)</td>
-</tr>
-<tr>
-<td>double-&gt;Double</td>
-<td align="center">Double(double value)/static Double.valueOf(double b)</td>
-</tr>
-</tbody></table>
-<h3 id="2-2-包装类-gt-基本类型"><a href="#2-2-包装类-gt-基本类型" class="headerlink" title="2.2 包装类=&gt;基本类型"></a>2.2 包装类=&gt;基本类型</h3><table>
-<thead>
-<tr>
-<th><strong>转换关系</strong></th>
-<th align="center"><strong>转换方式</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>byte&lt;-Byte</td>
-<td align="center">byte ByteInstance.byteValue()</td>
-</tr>
-<tr>
-<td>boolean&lt;-Boolean</td>
-<td align="center">short ShortInstance.shortValue()</td>
-</tr>
-<tr>
-<td>short&lt;-Short</td>
-<td align="center">int IntegerInstance.intValue()</td>
-</tr>
-<tr>
-<td>char&lt;-Character</td>
-<td align="center">char CharacterInstance.charValue()</td>
-</tr>
-<tr>
-<td>long&lt;-Long</td>
-<td align="center">long LongInstance.longValue()</td>
-</tr>
-<tr>
-<td>float&lt;-Float</td>
-<td align="center">float FloatInstance.floatValue()</td>
-</tr>
-<tr>
-<td>double&lt;-Double</td>
-<td align="center">double DoubleInstance.doubleValue()</td>
-</tr>
-</tbody></table>
-<h3 id="2-3-基本类型-gt-String"><a href="#2-3-基本类型-gt-String" class="headerlink" title="2.3 基本类型=&gt;String"></a>2.3 基本类型=&gt;String</h3><table>
-<thead>
-<tr>
-<th><strong>转换关系</strong></th>
-<th align="center"><strong>转换方式</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>byte-&gt;String</td>
-<td align="center">Byte.toString(byte value)/static String.valueOf(byte b)</td>
-</tr>
-<tr>
-<td>boolean-&gt;String</td>
-<td align="center">Boolean.toString(boolean value)/static String.valueOf(boolean b)</td>
-</tr>
-<tr>
-<td>short-&gt;String</td>
-<td align="center">Short.toString(short value)/static String.valueOf(short b)</td>
-</tr>
-<tr>
-<td>char-&gt;String</td>
-<td align="center">Character.toString(char value)/static String.valueOf(char b)</td>
-</tr>
-<tr>
-<td>long-&gt;String</td>
-<td align="center">Long.toString(long value)/static String.valueOf(long b)</td>
-</tr>
-<tr>
-<td>float-&gt;String</td>
-<td align="center">Float.toString(float value)/static String.valueOf(float b)</td>
-</tr>
-<tr>
-<td>double-&gt;String</td>
-<td align="center">Double.toString(double value)/static String.valueOf(double b)</td>
-</tr>
-</tbody></table>
-<h3 id="2-4-String-gt-基本类型"><a href="#2-4-String-gt-基本类型" class="headerlink" title="2.4 String=&gt;基本类型"></a>2.4 String=&gt;基本类型</h3><table>
-<thead>
-<tr>
-<th><strong>转换关系</strong></th>
-<th align="center"><strong>转换方式</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>byte&lt;-String</td>
-<td align="center">static byte Byte.parseByte(String s)</td>
-</tr>
-<tr>
-<td>boolean&lt;-String</td>
-<td align="center">static boolean Boolean.parseBoolean(String s)</td>
-</tr>
-<tr>
-<td>short&lt;-String</td>
-<td align="center">static short Short.parseShort(String s)</td>
-</tr>
-<tr>
-<td><del>char&lt;-String</del></td>
-<td align="center"><del>static char Character.parseCharacter(String s)</del></td>
-</tr>
-<tr>
-<td>long&lt;-String</td>
-<td align="center">static long Long.parseLong(String s)</td>
-</tr>
-<tr>
-<td>float&lt;-String</td>
-<td align="center">static float Float.parseFloat(String s)</td>
-</tr>
-<tr>
-<td>double&lt;-String</td>
-<td align="center">static double Double.parseDouble(String s)</td>
-</tr>
-</tbody></table>
-<h3 id="2-5-包装类-gt-String"><a href="#2-5-包装类-gt-String" class="headerlink" title="2.5 包装类=&gt;String"></a>2.5 包装类=&gt;String</h3><table>
-<thead>
-<tr>
-<th><strong>转换关系</strong></th>
-<th align="center"><strong>转换方式</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Byte-&gt;String</td>
-<td align="center">String ByteInstance.toString()</td>
-</tr>
-<tr>
-<td>Boolean-&gt;String</td>
-<td align="center">String BooleanInstance.toString()</td>
-</tr>
-<tr>
-<td>Short-&gt;String</td>
-<td align="center">String ShortInstance.toString()</td>
-</tr>
-<tr>
-<td>Character-&gt;String</td>
-<td align="center">String CharacterInstance.toString()</td>
-</tr>
-<tr>
-<td>Long-&gt;String</td>
-<td align="center">String LongInstance.toString()</td>
-</tr>
-<tr>
-<td>Float-&gt;String</td>
-<td align="center">String FloatInstance.toString()</td>
-</tr>
-<tr>
-<td>Double-&gt;String</td>
-<td align="center">String DoubleInstance.toString()</td>
-</tr>
-</tbody></table>
-<h3 id="2-6-String-gt-包装类"><a href="#2-6-String-gt-包装类" class="headerlink" title="2.6 String=&gt;包装类"></a>2.6 String=&gt;包装类</h3><table>
-<thead>
-<tr>
-<th><strong>转换关系</strong></th>
-<th align="center"><strong>转换方式</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Byte&lt;-String</td>
-<td align="center">static Byte.valueOf(String b)</td>
-</tr>
-<tr>
-<td>Boolean&lt;-String</td>
-<td align="center">static Boolean.valueOf(String b)</td>
-</tr>
-<tr>
-<td>Short&lt;-String</td>
-<td align="center">static Short.valueOf(String b)</td>
-</tr>
-<tr>
-<td>Character&lt;-String</td>
-<td align="center">static Character.valueOf(String b)</td>
-</tr>
-<tr>
-<td>Long&lt;-String</td>
-<td align="center">static Long.valueOf(String b)</td>
-</tr>
-<tr>
-<td>Float&lt;-String</td>
-<td align="center">static Float.valueOf(String b)</td>
-</tr>
-<tr>
-<td>Double&lt;-String</td>
-<td align="center">static Double.valueOf(String b)</td>
-</tr>
-</tbody></table>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/08/09/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86%E4%B8%80/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/09/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2020/08/09/hello-world/" class="archive-article-date">
-  	<time datetime="2020-08-09T02:15:40.295Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/08/09/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+    </nav>
   
 
 
